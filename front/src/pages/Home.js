@@ -1,12 +1,8 @@
 import React, { Component } from "react";
 import Card from "../components/CardComponent";
+import { Link } from "react-router-dom";
 
 export default class Home extends Component {
-  state = {
-    title: "Levent",
-    posts: []
-  };
-
   async componentDidMount() {}
 
   render() {
@@ -20,9 +16,11 @@ export default class Home extends Component {
               près de chez vous !
             </p>
             <div className="container-button">
-              <button className="btn-rounded-100 btn-violet">
-                Inscrivez-vous
-              </button>
+              <Link to="/inscription">
+                <button className="btn-rounded-100 btn-violet">
+                  Inscrivez-vous
+                </button>
+              </Link>
             </div>
           </div>
 

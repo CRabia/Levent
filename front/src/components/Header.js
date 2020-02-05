@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import logo from "../logo.png";
+import { Link } from "react-router-dom";
 
 export default class Header extends Component {
   async componentDidMount() {
@@ -10,14 +11,23 @@ export default class Header extends Component {
     return (
       <div className="menu">
         <img src={logo} className="logo" />
+
         <div className="item-nav vertical-center">
-          <p>Contact</p>
+          <Link to="/contact">
+            <p>Contact</p>
+          </Link>
         </div>
+
         <div className="item-nav vertical-center">
-          <p>Connexion</p>
+          <Link to="/connexion">
+            <p>Connexion</p>
+          </Link>
         </div>
+
         <div className="item-nav vertical-center">
-          <button className=" btn-rounded-100 btn-violet">Inscription</button>
+          <Link to="/inscription">
+            <button className=" btn-rounded-100 btn-violet">Inscription</button>
+          </Link>
         </div>
       </div>
     );
