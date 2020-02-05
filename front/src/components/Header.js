@@ -10,8 +10,9 @@ export default class Header extends Component {
   render() {
     return (
       <div className="menu">
-        <img src={logo} className="logo" />
-
+        <Link to="/">
+          <img src={logo} className="logo" />
+        </Link>
         <div className="item-nav vertical-center">
           <Link to="/contact">
             <p>Contact</p>
