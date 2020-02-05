@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import logo from "../logo.png";
 import { Link } from "react-router-dom";
 
 export default class Header extends Component {
@@ -10,9 +9,6 @@ export default class Header extends Component {
   render() {
     return (
       <div className="menu">
-        <Link to="/">
-          <img src={logo} className="logo" />
-        </Link>
         <div className="item-nav vertical-center">
           <Link to="/contact">
             <p>Contact</p>

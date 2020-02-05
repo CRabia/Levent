@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Card from "../components/CardComponent";
 import { Link } from "react-router-dom";
+import logo from "../logo.png";
 
 export default class Home extends Component {
   async componentDidMount() {}
@@ -10,6 +11,7 @@ export default class Home extends Component {
       <div id="homepage">
         <section className="banner-home">
           <div className="content">
+            <img src={logo} className="logo" />
             <h1>Découvrez toutes les activitées près de chez vous</h1>
             <p>
               En vous inscrivant vous pourrez participer à pleins d'activitées
