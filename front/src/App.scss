@@ -1,0 +1,156 @@
+#root {
+  margin: -20px 0 0 0 !important;
+  padding: 0 !important;
+  font-family: "Montserrat";
+}
+
+.vertical-center {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.menu {
+  display: flex;
+  height: 73px;
+  justify-content: flex-end;
+  width: calc(100% - 50px);
+  margin: 0;
+  padding: 0 25px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  .item-nav {
+    padding: 5px 25px;
+    p {
+      color: white;
+      font-size: 18px;
+      margin: 0;
+    }
+  }
+}
+
+#homepage {
+  min-height: calc(100vh - 73px);
+  width: 100%;
+  padding: 75px 0 150px 0;
+  background: linear-gradient(35deg, #9c5fd4, #458bed);
+  &:before {
+    content: "";
+    position: absolute;
+    bottom: -132px;
+    display: block;
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 1),
+      rgba(255, 255, 255, 0.3),
+      rgba(255, 255, 255, 0)
+    );
+  }
+
+  .banner-home {
+    display: flex;
+    justify-content: center;
+    .content {
+      color: white;
+      max-width: 600px;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      height: calc(100vh - 130px);
+      h1 {
+        font-size: 42px;
+        margin: 0;
+      }
+      p {
+        font-size: 20px;
+        font-weight: normal;
+        margin: 40px 0;
+      }
+    }
+    .illustration {
+      margin: 0 0 0 50px;
+      max-width: 530px;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      height: calc(100vh - 130px);
+      .display-card {
+        display: flex;
+        justify-content: center;
+        .card-component {
+          transform: rotateY(-35deg) rotateX(25deg) rotate(8deg);
+        }
+      }
+      .position-top {
+        .card-component {
+          position: relative;
+          top: 120px;
+          left: 45px;
+        }
+      }
+      .position-bottom {
+        .card-component {
+          position: relative;
+          z-index: 3;
+          top: -120px;
+          left: -45px;
+        }
+      }
+    }
+  }
+}
+
+.btn-rounded-100 {
+  background-color: transparent;
+  color: white;
+  border-radius: 2rem;
+  border: 1px solid white;
+  padding: 8px 25px;
+  font-size: 18px;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
+}
+
+.btn-violet {
+  transition: 0.4s;
+  &:hover {
+    background-color: white;
+    color: #9c5fd4;
+    box-shadow: 2px 6px 12px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.logo {
+  width: 50px;
+  height: 80px;
+  position: absolute;
+  left: 20px;
+  top: 5px;
+}
+
+.card-component {
+  background-color: white;
+  width: 225px;
+  height: 275px;
+  border-radius: 8px;
+  margin: 3px;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  .card-content {
+    color: black;
+    padding: 10px;
+    p {
+      margin: 0;
+    }
+  }
+  .card-illustration {
+    background-color: #e5e5e5;
+    width: 100%;
+    height: 135px;
+    border-radius: 8px 8px 0 0;
+  }
+}
