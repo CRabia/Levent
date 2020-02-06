@@ -15,8 +15,6 @@ export default class AuthController {
             const { email, password } = req.body;
             const user = await User.findOne({ email });
 
-            //console.log(user.password === password);
-
             if (user && user.password === password) {
                 const token = jwt.sign(
                     {
