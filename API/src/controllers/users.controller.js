@@ -1,123 +1,125 @@
 import User from "../models/User";
 
 export default class UserController {
-    /**
-     * Creates a User in a database
-     * @param {Request} req
-     * @param {Response} res
-     */
-    static async create(req, res) {
-        let status = 200;
-        let body = {};
+  /**
+   * Creates a User in a database
+   * @param {Request} req
+   * @param {Response} res
+   */
+  static async create(req, res) {
+    let status = 200;
+    let body = {};
 
-        try {
-            let newUser = await User.create({
-                firstname: req.body.firstname,
-                lastname: req.body.lastname,
-                email: req.body.email,
-                password: req.body.password
-            });
+    try {
+      let newUser = await User.create({
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        email: req.body.email,
+        password: req.body.password
+      });
 
-            body = {
-                newUser,
-                message: "Users of Levent was created"
-            };
-        } catch (error) {
-            status = 500;
-            body = { message: error.message };
-        }
-
-        return res.status(status).json(body);
+      body = {
+        newUser,
+        message: "Users of Levent was created"
+      };
+    } catch (error) {
+      status = 500;
+      body = { message: error.message };
     }
 
-    /**
-     * Return the list of all user
-     * @param {Request} req
-     * @param {Response} res
-     */
+    return res.status(status).json(body);
+  }
 
-    static async list(req, res) {
-        let status = 200;
-        let body = {};
+  /**
+   * Return the list of all user
+   * @param {Request} req
+   * @param {Response} res
+   */
 
-        try {
-            let users = await User.find().select("-email -__v");
-            body = { users, message: "Users list" };
-        } catch (error) {
-            status = 500;
-            body = { message: error.message };
-        }
+  static async list(req, res) {
+    let status = 200;
+    let body = {};
 
-        return res.status(status).json(body);
+    try {
+      let users = await User.find().select("-email -__v");
+      body = { users, message: "Users list" };
+    } catch (error) {
+      status = 500;
+      body = { message: error.message };
     }
 
-    /**
-     * Find user in database and returns his information
-     * @param {Request} req
-     * @param {Response} res
-     */
-    static async details(req, res) {
-        let status = 200;
-        let body = {};
+    return res.status(status).json(body);
+  }
 
-        try {
-            let id = req.params.id;
-            let users = await User.findById(id);
-            body = { users, message: "User was found" };
-        } catch (error) {
-            status = 500;
-            body = { message: error.message };
-        }
+  /**
+   * Find user in database and returns his information
+   * @param {Request} req
+   * @param {Response} res
+   */
+  static async details(req, res) {
+    let status = 200;
+    let body = {};
 
-        return res.status(status).json(body);
+    try {
+      let id = req.params.id;
+      let user = await User.findById(id);
+      user
+        ? (body = { user, message: "User was found" })
+        : (body = { user, message: "User was not found" });
+    } catch (error) {
+      status = 500;
+      body = { message: error.message };
     }
 
-    /**
-     * Find user in database and deletes he
-     * @param {Request} req
-     * @param {Response} res
-     */
-    static async delete(req, res) {
-        let status = 200;
-        let body = {};
+    return res.status(status).json(body);
+  }
 
-        try {
-            await User.remove({ _id: req.params.id });
-            body = { message: "User was deleted" };
-        } catch (error) {
-            status = 500;
-            body = { message: error.message };
-        }
+  /**
+   * Find user in database and deletes he
+   * @param {Request} req
+   * @param {Response} res
+   */
+  static async delete(req, res) {
+    let status = 200;
+    let body = {};
 
-        return res.status(status).json(body);
+    try {
+      await User.remove({ _id: req.params.id });
+      body = { message: "User was deleted" };
+    } catch (error) {
+      status = 500;
+      body = { message: error.message };
     }
 
-    /**
-     * Find user in database and updates he
-     * @param {Request} req
-     * @param {Response} res
-     */
-    static async update(req, res) {
-        let status = 200;
-        let body = {};
+    return res.status(status).json(body);
+  }
 
-        try {
-            let user = await User.update(
-                { _id: req.params.id },
-                {
-                    firstname: req.body.firstname,
-                    lastname: req.body.lastname,
-                    email: req.body.email
-                },
-                { new: true }
-            );
+  /**
+   * Find user in database and updates he
+   * @param {Request} req
+   * @param {Response} res
+   */
+  static async update(req, res) {
+    let status = 200;
+    let body = {};
 
-            body = { user, message: "User was updated" };
-        } catch (error) {
-            status = 500;
-            body = { message: error.message };
-        }
+    try {
+      let user = await User.update(
+        { _id: req.params.id },
+        {
+          firstname: req.body.firstname,
+          lastname: req.body.lastname,
+          email: req.body.email
+        },
+        { new: true }
+      );
 
-        return res.status(status).json(body);
+      body = { user, message: "User was updated" };
+    } catch (error) {
+      status = 500;
+      body = { message: error.message };
     }
+
+    return res.status(status).json(body);
+  }
 }

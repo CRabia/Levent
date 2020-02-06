@@ -3,6 +3,7 @@ import UserController from "../controllers/users.controller";
 import AuthController from "../controllers/auth.controller";
 import CommentController from "../controllers/comment.controller";
 import CategoryController from "../controllers/category.controller";
+import FriendController from "../controllers/friend.controller";
 const router = Router();
 
 //Auth routes
@@ -28,5 +29,9 @@ router.get("/categories", CategoryController.list);
 router.get("/categories/:id", CategoryController.details);
 router.delete("/categories/:id", CategoryController.delete);
 router.put("/categories/:id", CategoryController.update);
+
+//Friends routes
+router.post("/friend", FriendController.create);
+router.get("/friends/:id", FriendController.list);
 
 export default router;

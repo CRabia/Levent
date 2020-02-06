@@ -20,11 +20,11 @@ app.use(jwt());
 app.use(router);
 
 //Config database mongo
-const port = 3000;
+const port = 3001;
 
 database.connectDb().then(() => {
-    console.log("Database server is connected !");
-    app.listen(port, () => {
-        console.log(`Server listening on port ${port}`);
-    });
+  console.log("Database server is connected !");
+  app.listen(port, () => {
+    console.log(`Server listening on port ${port}`);
+  });
 });
