@@ -33,8 +33,30 @@ $main-color-text: #304973;
 }
 
 //header
-.menu {
+.opaque-nav-bar {
+  background-color: white;
+  .item-nav {
+    a {
+      p {
+        color: $main-color-text !important;
+      }
+      .btn-violet {
+        border-color: $main-color-text;
+        color: $main-color-text;
+        &:hover {
+          border-color: #9c5fd4;
+          background-color: #9c5fd4;
+          color: white;
+          box-shadow: none;
+        }
+      }
+    }
+  }
+}
+
+#menu {
   display: flex;
+  transition: 0.6s;
   z-index: 1024;
   height: 73px;
   justify-content: flex-end;
@@ -46,11 +68,10 @@ $main-color-text: #304973;
   left: 0;
 
   .item-nav {
-    padding: 5px 25px;
+    padding: 0 25px;
     height: 73px;
     a {
       text-decoration: none;
-      color: white;
       p {
         color: white;
         font-size: 18px;
