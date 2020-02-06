@@ -4,6 +4,30 @@ import { Link } from "react-router-dom";
 import logo from "../logo.png";
 
 export default class Home extends Component {
+    componentDidMount() {
+        setTimeout(this.animationSlideTop, 1500);
+    }
+
+    animationSlideTop = () => {
+        document
+            .getElementById("position-top")
+            .classList.toggle("active-animation");
+        setTimeout(this.animationSlideMiddle, 500);
+    };
+
+    animationSlideMiddle = () => {
+        document
+            .getElementById("position-middle")
+            .classList.toggle("active-animation");
+        setTimeout(this.animationSlideBottom, 500);
+    };
+
+    animationSlideBottom = () => {
+        document
+            .getElementById("position-bottom")
+            .classList.toggle("active-animation");
+    };
+
     render() {
         return (
             <div id="homepage">
@@ -27,14 +51,14 @@ export default class Home extends Component {
                     </div>
 
                     <div className="illustration">
-                        <div className="display-card position-top">
+                        <div className="display-card" id="position-top">
                             <Card />
                         </div>
-                        <div className="display-card">
+                        <div className="display-card" id="position-middle">
                             <Card />
                             <Card />
                         </div>
-                        <div className="display-card position-bottom">
+                        <div className="display-card" id="position-bottom">
                             <Card />
                         </div>
                     </div>

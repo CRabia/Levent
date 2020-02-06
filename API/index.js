@@ -3,6 +3,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import database from "./src/models/database";
 import router from "./src/routes/routes";
+import jwt from "./src/config/jwt";
 
 //init
 const app = express();
@@ -12,6 +13,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors({ origin: true }));
 
+//Auth
+app.use(jwt());
+
 //Make route
 app.use(router);
 
@@ -19,8 +23,8 @@ app.use(router);
 const port = 3000;
 
 database.connectDb().then(() => {
-  console.log("Database server is connected !");
-  app.listen(port, () => {
-    console.log(`Server listening on port ${port}`);
-  });
+    console.log("Database server is connected !");
+    app.listen(port, () => {
+        console.log(`Server listening on port ${port}`);
+    });
 });
