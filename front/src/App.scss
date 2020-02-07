@@ -36,17 +36,22 @@ $main-color-text: #304973;
 //header
 .opaque-nav-bar {
   background-color: white;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  height: 60px !important ;
   .item-nav {
+    height: 60px !important;
     a {
       p {
         color: $main-color-text !important;
+        font-size: 15px !important;
       }
       .btn-violet {
         border-color: $main-color-text;
         color: $main-color-text;
+        font-size: 15px !important;
         &:hover {
           border-color: #9c5fd4;
-          background-color: #9c5fd4;
+          background: linear-gradient(35deg, #9c5fd4, #458bed) !important;
           color: white;
           box-shadow: none;
         }
@@ -57,7 +62,7 @@ $main-color-text: #304973;
 
 #menu {
   display: flex;
-  transition: 0.6s;
+  transition: 0.4s;
   z-index: 1024;
   height: 73px;
   justify-content: flex-end;
@@ -251,7 +256,7 @@ $main-color-text: #304973;
         height: fit-content;
         padding: 35px 15px 55px 15px;
         box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
-        transform: rotateY(19deg) rotateX(-10deg) rotate(2deg);
+        transform: rotateY(15deg) rotateX(-15deg) rotate(1deg);
         h2 {
           margin: 0 0 35px 0;
           text-align: center;
@@ -287,6 +292,23 @@ $main-color-text: #304973;
         }
         .container-input {
           display: flex;
+        }
+        .btn {
+          background-color: #efefefbe;
+          color: $main-color-text;
+          font-size: 18px !important;
+          padding: 12px 25px;
+          border: none;
+          margin: 25px 15px 0 15px;
+          border-radius: 8px;
+          width: calc(100% - 30px);
+          cursor: pointer;
+          &:hover {
+            border-color: #9c5fd4;
+            background: linear-gradient(35deg, #9c5fd4, #458bed) !important;
+            color: white;
+            box-shadow: none;
+          }
         }
       }
     }
@@ -327,4 +349,45 @@ $main-color-text: #304973;
   padding: 73px 0 0 0;
   background: linear-gradient(35deg, #9c5fd4, #458bed);
   min-height: calc(100vh - 73px);
+
+  .container-logs {
+    margin: 30px auto;
+    background-color: white;
+    width: 320px;
+    height: fit-content;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+    label {
+      display: block;
+      color: $main-color-text;
+      margin: 15px 0 5px 0;
+    }
+    input {
+      padding: 8px 15px;
+      border-radius: 8px;
+      border: 1px solid #efefef;
+      width: calc(100% - 35px);
+    }
+    .logo{
+      width: 85px;
+      height: 60px;
+    }
+    .btn {
+      border-color: $main-color-text;
+      color: $main-color-text;
+      font-size: 15px !important;
+      padding: 8px 25px;
+      border: none;
+      margin: 25px 15px 0 15px;
+      border-radius: 8px;
+      width: calc(100% - 30px);
+      &:hover {
+        border-color: #9c5fd4;
+        background: linear-gradient(35deg, #9c5fd4, #458bed) !important;
+        color: white;
+        box-shadow: none;
+      }
+    }
+  }
 }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AuthService from "../services/auth.service";
+import logo from "../logo.png";
 
 export default class Login extends Component {
     state = {
@@ -19,7 +20,6 @@ export default class Login extends Component {
         if (response.ok) {
             let data = await response.json();
             localStorage.setItem("token", data.token);
-            console.log(data);
             this.props.history.push("/");
         } else {
         }
@@ -28,34 +28,35 @@ export default class Login extends Component {
     render() {
         return (
             <section id="login-page">
-                <h1>Login</h1>
-                <form onSubmit={e => this.submit(e)}>
-                    <div className="form-group">
-                        <label>Email</label>
-                        <input
-                            type="text"
-                            id="email"
-                            className="form-control"
-                            required
-                            onChange={e => this.handleChange(e)}
-                        />
-                    </div>
+                <div className="container-logs">
+                    <img src={logo} className="logo" />
+                    <h1>Login</h1>
+                    <form onSubmit={e => this.submit(e)}>
+                        <div className="form-group">
+                            <label>Email</label>
+                            <input
+                                type="text"
+                                id="email"
+                                required
+                                onChange={e => this.handleChange(e)}
+                            />
+                        </div>
 
-                    <div className="form-group">
-                        <label>Password</label>
-                        <input
-                            type="password"
-                            id="password"
-                            className="form-control"
-                            required
-                            onChange={e => this.handleChange(e)}
-                        />
-                    </div>
+                        <div className="form-group">
+                            <label>Password</label>
+                            <input
+                                type="password"
+                                id="password"
+                                required
+                                onChange={e => this.handleChange(e)}
+                            />
+                        </div>
 
-                    <button type="submit" className="btn btn-primary">
-                        Connexion
-                    </button>
-                </form>
+                        <button type="submit" className="btn">
+                            Connexion
+                        </button>
+                    </form>
+                </div>
             </section>
         );
     }
