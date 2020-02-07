@@ -18,7 +18,6 @@ export default class CommentController {
                 content: req.body.content,
                 createdAt: new Date()
             });
-
             body = {
                 newComment,
                 message: "Comment was created"
