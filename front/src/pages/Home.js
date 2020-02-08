@@ -5,7 +5,7 @@ import logo from "../logo.png";
 
 export default class Home extends Component {
   componentDidMount() {
-    setTimeout(this.animationSlideTop, 1500);
+    setTimeout(this.animationSlideTop, 500);
   }
 
   animationSlideTop = () => {

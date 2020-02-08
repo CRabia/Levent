@@ -23,8 +23,13 @@ export default class Login extends Component {
     });
   }
 
-  changePageLog = async () => {
+  changePageLog = () => {
     this.setState({ pageLog: "register" });
+    this.animationContainerForm();
+    this.changeTitleOfThePage();
+  };
+
+  animationContainerForm = () => {
     document
       .getElementById("container-email-log")
       .classList.toggle("animation-email-register");
@@ -34,8 +39,6 @@ export default class Login extends Component {
     document
       .getElementById("container-name-log")
       .classList.toggle("animation-name-register");
-
-    this.changeTitleOfThePage();
   };
 
   changeTitleOfThePage = () => {

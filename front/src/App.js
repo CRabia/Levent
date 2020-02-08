@@ -28,9 +28,9 @@ export default class App extends Component {
           {this.state.renderHender && <Header />}
 
           <Route path="/" exact component={Home} />
-          <Route path="/contact" component={Contact} />
-          <Route path="/inscription" component={Login} />
-          <Route path="/connexion" component={Login} />
+          <Route path="/contact" exact component={Contact} />
+          <Route path="/inscription" exact component={Login} />
+          <Route path="/connexion" exact component={Login} />
 
           {this.state.renderFooter && <Footer />}
         </BrowserRouter>
