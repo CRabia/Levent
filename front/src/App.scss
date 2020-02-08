@@ -348,45 +348,133 @@ $main-color-text: #304973;
 #login-page {
   padding: 73px 0 0 0;
   background: linear-gradient(35deg, #9c5fd4, #458bed);
-  min-height: calc(100vh - 73px);
-
-  .container-logs {
-    margin: 30px auto;
-    background-color: white;
-    width: 320px;
-    height: fit-content;
-    padding: 25px;
+  min-height: calc(100vh);
+  position: absolute;
+  top: -73px;
+  width: 100%;
+  display: flex;
+  label {
+    display: block;
+    color: $main-color-text;
+    margin: 0 0 5px 0;
+    font-weight: bold;
+  }
+  input {
+    padding: 8px 15px;
     border-radius: 8px;
-    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
-    label {
-      display: block;
-      color: $main-color-text;
-      margin: 15px 0 5px 0;
-    }
-    input {
-      padding: 8px 15px;
+    border: 1px solid #e7e7e7;
+    background-color: #e7e7e7;
+    color: $main-color-text;
+    width: calc(100% - 30px);
+    &:focus {
+      outline: none;
       border-radius: 8px;
-      border: 1px solid #efefef;
-      width: calc(100% - 35px);
+      border: 1px solid #b188d8;
     }
-    .logo{
-      width: 85px;
-      height: 60px;
-    }
-    .btn {
-      border-color: $main-color-text;
-      color: $main-color-text;
-      font-size: 15px !important;
-      padding: 8px 25px;
-      border: none;
-      margin: 25px 15px 0 15px;
-      border-radius: 8px;
-      width: calc(100% - 30px);
-      &:hover {
-        border-color: #9c5fd4;
-        background: linear-gradient(35deg, #9c5fd4, #458bed) !important;
-        color: white;
+  }
+  .btn {
+    background: linear-gradient(35deg, #9c5fd4, #458bed) !important;
+    color: white;
+    border: none;
+    font-size: 15px !important;
+    padding: 8px 25px;
+    margin: 25px 0 0 0;
+    border-radius: 8px;
+    width: 100%;
+    cursor: pointer;
+  }
+  .container-logs-right {
+    width: 50%;
+    height: 100vh;
+    overflow: hidden;
+    .container-form {
+      margin: 200px 0 0 0;
+      #container-name-log {
+        padding: 25px;
+        border-radius: 8px;
+        background-color: white;
+        width: 100%;
+        max-width: 400px;
+        position: relative;
+        transition: 0.4s;
+        top: 180px;
+        left: 0;
+        transform: translateX(-100%);
         box-shadow: none;
+        opacity: 0;
+      }
+      .animation-name-register {
+        transform: translateX(5%) !important;
+        box-shadow: 0 -3px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22) !important;
+        opacity: 1 !important;
+      }
+    }
+  }
+  .container-logs {
+    width: 50%;
+    background-color: white;
+    height: 100vh;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+    .container-form {
+      margin: 200px 0 0 0;
+      #container-email-log,
+      #container-password-log {
+        padding: 25px;
+        border-radius: 8px;
+        background-color: white;
+        width: 100%;
+        max-width: 400px;
+        position: relative;
+      }
+
+      #container-email-log {
+        transition: 0.4s;
+        padding: 25px 25px 45px 25px;
+        top: 0;
+        left: 100%;
+        transform: translateX(-85%);
+        box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+      }
+      #container-password-log {
+        transition: 0.4s;
+        top: -15px;
+        left: 100%;
+        transform: translateX(-73%);
+        box-shadow: 0 -3px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+        .underButton {
+          color: $main-color-text;
+          font-size: 12px;
+          span {
+            text-decoration: underline;
+            cursor: pointer;
+            &:hover {
+              font-weight: bold;
+            }
+          }
+        }
+      }
+
+      #title {
+        padding: 0 100px;
+        transition: 0.4s;
+        color: $main-color-text;
+        font-size: 36px;
+        width: fit-content;
+        margin: 0 0 25px auto;
+      }
+
+      .animation-title-register {
+        transform: translateX(100%);
+        color: white !important;
+      }
+
+      .animation-email-register {
+        transform: translateX(-15%) !important;
+      }
+
+      .animation-password-register {
+        top: 130px !important;
+        transform: translateX(-27%) !important;
       }
     }
   }

@@ -8,21 +8,33 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { AuthContext } from "./contexts/auth.context";
 
-class App extends Component {
-    render() {
-        return (
-            <AuthContext.Provider>
-                <BrowserRouter>
-                    <Header />
-                    <Route path="/" exact component={Home} />
-                    <Route path="/contact" exact component={Contact} />
-                    <Route path="/inscription" exact component={Login} />
-                    <Route path="/connexion" exact component={Login} />
-                    <Footer />
-                </BrowserRouter>
-            </AuthContext.Provider>
-        );
-    }
-}
+export default class App extends Component {
+  state = {
+    renderHender: true,
+    renderFooter: true
+  };
 
-export default App;
+  componentDidMount() {
+    let routes = ["/connexion", "/inscription"];
+    !routes.includes(window.location.pathname)
+      ? this.setState({ renderFooter: true, renderHender: true })
+      : this.setState({ renderFooter: false, renderHender: false });
+  }
+
+  render() {
+    return (
+      <AuthContext.Provider>
+        <BrowserRouter>
+          {this.state.renderHender && <Header />}
+
+          <Route path="/" exact component={Home} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/inscription" component={Login} />
+          <Route path="/connexion" component={Login} />
+
+          {this.state.renderFooter && <Footer />}
+        </BrowserRouter>
+      </AuthContext.Provider>
+    );
+  }
+}
