@@ -4,20 +4,58 @@ import AuthController from "../controllers/auth.controller";
 import CommentController from "../controllers/comment.controller";
 import CategoryController from "../controllers/category.controller";
 import FriendController from "../controllers/friend.controller";
+
 const router = Router();
+const { check } = require("express-validator/check");
 
 //Auth routes
 router.post("/users/authenticate", AuthController.authenticate);
 
 // Users routes
-router.post("/user", UserController.create);
+router.post(
+  "/user",
+  [
+    check("email")
+      .isEmail()
+      .withMessage("L'email est incorrect"),
+    check("password")
+      .isLength({ min: 5 })
+      .withMessage("Le mot de passe doit contenir au moins 5 caractères"),
+    check("firstname")
+      .not()
+      .isEmpty()
+      .withMessage("Merci de saisir votre prénom"),
+    check("lastname")
+      .not()
+      .isEmpty()
+      .withMessage("Merci de saisir votre nom")
+  ],
+  UserController.create
+);
+
 router.get("/users", UserController.list);
 router.get("/users/:id", UserController.details);
 router.delete("/users/:id", UserController.delete);
 router.put("/users/:id", UserController.update);
 
 //Comments routes
-router.post("/comment", CommentController.create);
+router.post(
+  "/comment",
+  [
+    check("email")
+      .isEmail()
+      .withMessage("L'email est incorrect"),
+    check("firstname")
+      .not()
+      .isEmpty()
+      .withMessage("Merci de saisir votre prénom"),
+    check("lastname")
+      .not()
+      .isEmpty()
+      .withMessage("Merci de saisir votre nom")
+  ],
+  CommentController.create
+);
 router.get("/comments", CommentController.list);
 router.get("/comments/:id", CommentController.details);
 router.delete("/comments/:id", CommentController.delete);

@@ -1,4 +1,5 @@
 import User from "../models/User";
+const { validationResult } = require("express-validator/check");
 
 export default class UserController {
   /**
@@ -9,6 +10,11 @@ export default class UserController {
   static async create(req, res) {
     let status = 200;
     let body = {};
+    let errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
 
     try {
       let newUser = await User.create({
