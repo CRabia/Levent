@@ -1,20 +1,37 @@
 import React, { Component } from "react";
 import AuthService from "../services/auth.service";
 
+const modelConnect = {
+  title: "Connexion",
+  textButton: "Connexion",
+  textUnderButton: ["Vous n'êtes pas encore inscrit ? ", "Inscrivez-vous"],
+  messageError: "",
+  request: "authentificate"
+};
+
+const modelRegister = {
+  title: "Inscription",
+  textButton: "S'inscrire",
+  textUnderButton: ["Vous êtes déjà inscrit ? ", "Connectez-vous"],
+  messageError: "",
+  request: "register"
+};
+
 export default class Login extends Component {
   state = {
     email: "",
     firstname: "",
-    name: "",
+    lastname: "",
     password: "",
-    pageLog: "login",
-    animationContainerEmail: "",
-    animationContainerPassword: "",
-    title: "Connexion"
+    request: "authentificate",
+    title: "Connexion",
+    textButton: "Connexion",
+    messageError: "",
+    textUnderButton: ["Vous n'êtes pas encore inscrit ? ", "Inscrivez-vous"]
   };
 
   componentDidMount() {
-    if (window.location.pathname == "/inscription") this.changePageLog();
+    window.location.pathname === "/inscription" && this.changePageLog();
   }
 
   handleChange(e) {
@@ -24,12 +41,11 @@ export default class Login extends Component {
   }
 
   changePageLog = () => {
-    this.setState({ pageLog: "register" });
-    this.animationContainerForm();
-    this.changeTitleOfThePage();
+    this.animationForm();
+    this.changeTextOfThePage();
   };
 
-  animationContainerForm = () => {
+  animationForm = () => {
     document
       .getElementById("container-email-log")
       .classList.toggle("animation-email-register");
@@ -39,25 +55,43 @@ export default class Login extends Component {
     document
       .getElementById("container-name-log")
       .classList.toggle("animation-name-register");
-  };
-
-  changeTitleOfThePage = () => {
-    this.state.title == "Connexion"
-      ? this.setState({ title: "Inscription" })
-      : this.setState({ title: "Connexion" });
     document
       .getElementById("title")
       .classList.toggle("animation-title-register");
   };
 
-  async submit(e) {
-    e.preventDefault();
+  changeTextOfThePage = () => {
+    if (this.state.title === "Connexion") {
+      this.setState(modelRegister);
+    } else {
+      this.setState(modelConnect);
+    }
+  };
+
+  userAuthentification = async () => {
     let response = await AuthService.auth(this.state);
+    let data = await response.json();
     if (response.ok) {
-      let data = await response.json();
       localStorage.setItem("token", data.token);
       this.props.history.push("/");
     } else {
+      this.setState({ messageError: data.message });
+    }
+  };
+
+  userRegistration = async () => {
+    let response = await AuthService.register(this.state);
+    if (response.ok) {
+      this.userAuthentification();
+    }
+  };
+
+  async submit(e) {
+    e.preventDefault();
+    if (this.state.request === "authentificate") {
+      this.userAuthentification();
+    } else {
+      this.userRegistration();
     }
   }
 
@@ -77,6 +111,22 @@ export default class Login extends Component {
                   onChange={e => this.handleChange(e)}
                 />
               </div>
+
+              <div id="container-name-log">
+                <label>Prénom</label>
+                <input
+                  type="text"
+                  id="firstname"
+                  onChange={e => this.handleChange(e)}
+                />
+                <label>Nom</label>
+                <input
+                  type="text"
+                  id="lastname"
+                  onChange={e => this.handleChange(e)}
+                />
+              </div>
+
               <div id="container-password-log">
                 <label>Password</label>
                 <input
@@ -85,37 +135,21 @@ export default class Login extends Component {
                   required
                   onChange={e => this.handleChange(e)}
                 />
+                <label className="error-log">{this.state.messageError}</label>
                 <button type="submit" className="btn">
-                  Connexion
+                  {this.state.textButton}
                 </button>
                 <p id="textConnection" className="underButton">
-                  Vous n'êtes pas encore inscrit ?{" "}
-                  <span onClick={this.changePageLog}>Inscrivez-vous</span>
+                  {this.state.textUnderButton[0]}
+                  <span onClick={this.changePageLog}>
+                    {this.state.textUnderButton[1]}
+                  </span>
                 </p>
               </div>
             </form>
           </div>
         </div>
-        <div className="container-logs-right">
-          <div className="container-form">
-            <div id="container-name-log">
-              <label>Prénom</label>
-              <input
-                type="text"
-                id="firtname"
-                required
-                onChange={e => this.handleChange(e)}
-              />
-              <label>Nom</label>
-              <input
-                type="text"
-                id="name"
-                required
-                onChange={e => this.handleChange(e)}
-              />
-            </div>
-          </div>
-        </div>
+        <div className="container-logs-right"></div>
       </section>
     );
   }

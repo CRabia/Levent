@@ -12,4 +12,16 @@ export default class AuthService {
     let call = await fetch(`${baseUrl}/users/authenticate`, init);
     return call;
   }
+
+  static async register(body) {
+    let init = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(body)
+    };
+    let call = await fetch(`${baseUrl}/user`, init);
+    return call;
+  }
 }

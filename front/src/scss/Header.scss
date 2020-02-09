@@ -1,0 +1,38 @@
+//Menu
+#menu {
+  display: flex;
+  transition: 0.4s;
+  z-index: 1024;
+  height: 73px;
+  justify-content: flex-end;
+  width: calc(100% - 50px);
+  margin: 0;
+  padding: 0 25px;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  .item-nav {
+    padding: 0 25px;
+    height: 73px;
+    a {
+      text-decoration: none;
+      p {
+        color: white;
+        font-size: 18px;
+        margin: 0;
+        opacity: 0.7;
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+.active-animation {
+  left: 0 !important;
+  .card-component {
+    opacity: 1 !important;
+  }
+}
