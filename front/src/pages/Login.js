@@ -5,16 +5,32 @@ const modelConnect = {
   title: "Connexion",
   textButton: "Connexion",
   textUnderButton: ["Vous n'êtes pas encore inscrit ? ", "Inscrivez-vous"],
-  messageError: "",
-  request: "authentificate"
+  request: "authentificate",
+  emailErrorMessage: "",
+  firstnameErrorMessage: "",
+  lastnameErrorMessage: "",
+  passwordErrorMessage: "",
+  errorMessage: ""
 };
 
 const modelRegister = {
   title: "Inscription",
   textButton: "S'inscrire",
   textUnderButton: ["Vous êtes déjà inscrit ? ", "Connectez-vous"],
-  messageError: "",
-  request: "register"
+  request: "register",
+  emailErrorMessage: "",
+  firstnameErrorMessage: "",
+  lastnameErrorMessage: "",
+  passwordErrorMessage: "",
+  errorMessage: ""
+};
+
+const resetErrorMessage = {
+  emailErrorMessage: "",
+  firstnameErrorMessage: "",
+  lastnameErrorMessage: "",
+  passwordErrorMessage: "",
+  errorMessage: ""
 };
 
 export default class Login extends Component {
@@ -23,10 +39,14 @@ export default class Login extends Component {
     firstname: "",
     lastname: "",
     password: "",
+    errorMessage: "",
+    emailErrorMessage: "",
+    firstnameErrorMessage: "",
+    lastnameErrorMessage: "",
+    passwordErrorMessage: "",
     request: "authentificate",
     title: "Connexion",
     textButton: "Connexion",
-    messageError: "",
     textUnderButton: ["Vous n'êtes pas encore inscrit ? ", "Inscrivez-vous"]
   };
 
@@ -68,6 +88,13 @@ export default class Login extends Component {
     }
   };
 
+  errorsDisplay = errors => {
+    this.setState(resetErrorMessage);
+    errors.forEach(element => {
+      this.setState({ [element.param + "ErrorMessage"]: element.msg });
+    });
+  };
+
   userAuthentification = async () => {
     let response = await AuthService.auth(this.state);
     let data = await response.json();
@@ -75,14 +102,17 @@ export default class Login extends Component {
       localStorage.setItem("token", data.token);
       this.props.history.push("/");
     } else {
-      this.setState({ messageError: data.message });
+      this.setState({ errorMessage: data.message });
     }
   };
 
   userRegistration = async () => {
     let response = await AuthService.register(this.state);
+    let data = await response.json();
     if (response.ok) {
       this.userAuthentification();
+    } else {
+      this.errorsDisplay(data.errors);
     }
   };
 
@@ -103,7 +133,12 @@ export default class Login extends Component {
             <h1 id="title">{this.state.title}</h1>
             <form onSubmit={e => this.submit(e)}>
               <div id="container-email-log">
-                <label>Email</label>
+                <div className="container-label">
+                  <label>Email</label>
+                  <label className="error-log">
+                    {this.state.emailErrorMessage}
+                  </label>
+                </div>
                 <input
                   type="text"
                   id="email"
@@ -113,13 +148,23 @@ export default class Login extends Component {
               </div>
 
               <div id="container-name-log">
-                <label>Prénom</label>
+                <div className="container-label">
+                  <label>Prénom</label>
+                  <label className="error-log">
+                    {this.state.firstnameErrorMessage}
+                  </label>
+                </div>
                 <input
                   type="text"
                   id="firstname"
                   onChange={e => this.handleChange(e)}
                 />
-                <label>Nom</label>
+                <div className="container-label">
+                  <label>Nom</label>
+                  <label className="error-log">
+                    {this.state.lastnameErrorMessage}
+                  </label>
+                </div>
                 <input
                   type="text"
                   id="lastname"
@@ -128,14 +173,19 @@ export default class Login extends Component {
               </div>
 
               <div id="container-password-log">
-                <label>Password</label>
+                <div className="container-label">
+                  <label>Mot de passe</label>
+                  <label className="error-log">
+                    {this.state.passwordErrorMessage}
+                  </label>
+                </div>
                 <input
                   type="password"
                   id="password"
                   required
                   onChange={e => this.handleChange(e)}
                 />
-                <label className="error-log">{this.state.messageError}</label>
+                <label className="error-log">{this.state.errorMessage}</label>
                 <button type="submit" className="btn">
                   {this.state.textButton}
                 </button>

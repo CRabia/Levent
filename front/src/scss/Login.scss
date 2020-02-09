@@ -55,6 +55,12 @@
     flex-direction: column;
 
     .container-form {
+      .container-label {
+        .error-log {
+          margin: 5px 0 !important;
+        }
+      }
+
       #container-email-log,
       #container-password-log {
         padding: 25px;
@@ -71,11 +77,12 @@
         top: 0;
         left: 100%;
         transform: translateX(-85%);
-        box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+        box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3),
+          0 15px 12px rgba(0, 0, 0, 0.22);
       }
 
       #container-name-log {
-        padding: 17px 25px 25px 25px;
+        padding: 17px 25px 32px 25px;
         border-radius: 8px;
         background-color: white;
         width: 100%;
@@ -87,7 +94,7 @@
         transform: translateX(-100%);
         box-shadow: none;
         opacity: 0;
-        height: 140px;
+        min-height: 133px;
         label {
           color: white;
           margin: 8px 0 5px 0;
@@ -102,7 +109,8 @@
         top: -200px;
         left: 100%;
         transform: translateX(-73%);
-        box-shadow: 0 -3px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+        box-shadow: 0 -3px 38px rgba(0, 0, 0, 0.3),
+          0 15px 12px rgba(0, 0, 0, 0.22);
         .underButton {
           color: $main-color-text;
           font-size: 12px;
@@ -136,10 +144,17 @@
 
       .animation-name-register {
         transform: translateX(5%) !important;
-        box-shadow: 0 -3px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22) !important;
+        box-shadow: 0 -3px 38px rgba(0, 0, 0, 0.3),
+          0 15px 12px rgba(0, 0, 0, 0.22) !important;
         opacity: 1 !important;
         label {
           color: $main-color-text !important;
+        }
+        .error-log {
+          color: $color-error !important;
+          font-weight: normal;
+          font-size: 12px;
+          margin: 10px 0 0 0;
         }
         input {
           display: block !important;

@@ -20,7 +20,7 @@ router.post(
       .withMessage("L'email est incorrect"),
     check("password")
       .isLength({ min: 5 })
-      .withMessage("Le mot de passe doit contenir au moins 5 caractères"),
+      .withMessage("Le mot de passe est trop court (min 5*)"),
     check("firstname")
       .not()
       .isEmpty()

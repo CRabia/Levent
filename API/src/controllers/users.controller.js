@@ -30,7 +30,9 @@ export default class UserController {
       };
     } catch (error) {
       status = 500;
-      body = { message: error.message };
+      body = {
+        errors: [{ param: "email", msg: "Cet email a déjà été utilisé." }]
+      };
     }
 
     return res.status(status).json(body);
