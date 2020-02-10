@@ -6,7 +6,7 @@ import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import { AuthContext } from "./contexts/auth.context";
+import AuthContext from "./contexts/auth.context";
 
 export default class App extends Component {
   state = {

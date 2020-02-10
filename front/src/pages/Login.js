@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AuthService from "../services/auth.service";
+import AuthContext from "../contexts/auth.context";
 
 const modelConnect = {
   title: "Connexion",
@@ -131,72 +132,78 @@ export default class Login extends Component {
         <div className="container-logs">
           <div className="container-form">
             <h1 id="title">{this.state.title}</h1>
-            <form onSubmit={e => this.submit(e)}>
-              <div id="container-email-log">
-                <div className="container-label">
-                  <label>Email</label>
-                  <label className="error-log">
-                    {this.state.emailErrorMessage}
-                  </label>
-                </div>
-                <input
-                  type="text"
-                  id="email"
-                  required
-                  onChange={e => this.handleChange(e)}
-                />
-              </div>
+            <AuthContext.Consumer>
+              {context => (
+                <form onSubmit={e => context.submit(e)}>
+                  <div id="container-email-log">
+                    <div className="container-label">
+                      <label>Email</label>
+                      <label className="error-log">
+                        {this.state.emailErrorMessage}
+                      </label>
+                    </div>
+                    <input
+                      type="text"
+                      id="email"
+                      required
+                      onChange={e => this.handleChange(e)}
+                    />
+                  </div>
 
-              <div id="container-name-log">
-                <div className="container-label">
-                  <label>Prénom</label>
-                  <label className="error-log">
-                    {this.state.firstnameErrorMessage}
-                  </label>
-                </div>
-                <input
-                  type="text"
-                  id="firstname"
-                  onChange={e => this.handleChange(e)}
-                />
-                <div className="container-label">
-                  <label>Nom</label>
-                  <label className="error-log">
-                    {this.state.lastnameErrorMessage}
-                  </label>
-                </div>
-                <input
-                  type="text"
-                  id="lastname"
-                  onChange={e => this.handleChange(e)}
-                />
-              </div>
+                  <div id="container-name-log">
+                    <div className="container-label">
+                      <label>Prénom</label>
+                      <label className="error-log">
+                        {this.state.firstnameErrorMessage}
+                      </label>
+                    </div>
+                    <input
+                      type="text"
+                      id="firstname"
+                      onChange={e => this.handleChange(e)}
+                    />
+                    <div className="container-label">
+                      <label>Nom</label>
+                      <label className="error-log">
+                        {this.state.lastnameErrorMessage}
+                      </label>
+                    </div>
+                    <input
+                      type="text"
+                      id="lastname"
+                      onChange={e => this.handleChange(e)}
+                    />
+                  </div>
 
-              <div id="container-password-log">
-                <div className="container-label">
-                  <label>Mot de passe</label>
-                  <label className="error-log">
-                    {this.state.passwordErrorMessage}
-                  </label>
-                </div>
-                <input
-                  type="password"
-                  id="password"
-                  required
-                  onChange={e => this.handleChange(e)}
-                />
-                <label className="error-log">{this.state.errorMessage}</label>
-                <button type="submit" className="btn">
-                  {this.state.textButton}
-                </button>
-                <p id="textConnection" className="underButton">
-                  {this.state.textUnderButton[0]}
-                  <span onClick={this.changePageLog}>
-                    {this.state.textUnderButton[1]}
-                  </span>
-                </p>
-              </div>
-            </form>
+                  <div id="container-password-log">
+                    <div className="container-label">
+                      <label>Mot de passe</label>
+                      <label className="error-log">
+                        {this.state.passwordErrorMessage}
+                      </label>
+                    </div>
+                    <input
+                      type="password"
+                      id="password"
+                      required
+                      onChange={e => this.handleChange(e)}
+                    />
+                    <label className="error-log">
+                      {this.state.errorMessage}
+                    </label>
+                    <button type="submit" className="btn">
+                      {this.state.textButton}
+                    </button>
+                    <p id="textConnection" className="underButton">
+                      {this.state.textUnderButton[0]}
+                      <span onClick={this.changePageLog}>
+                        {this.state.textUnderButton[1]}
+                      </span>
+                    </p>
+                  </div>
+                </form>
+              )}
+            </AuthContext.Consumer>
           </div>
         </div>
         <div className="container-logs-right"></div>
