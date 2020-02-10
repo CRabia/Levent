@@ -1,37 +1,18 @@
 import React, { Component } from "react";
-import AuthService from "../services/auth.service";
 import AuthContext from "../contexts/auth.context";
 
 const modelConnect = {
     title: "Connexion",
     textButton: "Connexion",
     textUnderButton: ["Vous n'êtes pas encore inscrit ? ", "Inscrivez-vous"],
-    request: "authentificate",
-    emailErrorMessage: "",
-    firstnameErrorMessage: "",
-    lastnameErrorMessage: "",
-    passwordErrorMessage: "",
-    errorMessage: ""
+    request: "authentificate"
 };
 
 const modelRegister = {
     title: "Inscription",
     textButton: "S'inscrire",
     textUnderButton: ["Vous êtes déjà inscrit ? ", "Connectez-vous"],
-    request: "register",
-    emailErrorMessage: "",
-    firstnameErrorMessage: "",
-    lastnameErrorMessage: "",
-    passwordErrorMessage: "",
-    errorMessage: ""
-};
-
-const resetErrorMessage = {
-    emailErrorMessage: "",
-    firstnameErrorMessage: "",
-    lastnameErrorMessage: "",
-    passwordErrorMessage: "",
-    errorMessage: ""
+    request: "register"
 };
 
 export default class Login extends Component {
@@ -40,11 +21,6 @@ export default class Login extends Component {
         firstname: "",
         lastname: "",
         password: "",
-        errorMessage: "",
-        emailErrorMessage: "",
-        firstnameErrorMessage: "",
-        lastnameErrorMessage: "",
-        passwordErrorMessage: "",
         request: "authentificate",
         title: "Connexion",
         textButton: "Connexion",
@@ -89,44 +65,14 @@ export default class Login extends Component {
         }
     };
 
-    errorsDisplay = errors => {
-        this.setState(resetErrorMessage);
-        errors.forEach(element => {
-            this.setState({ [element.param + "ErrorMessage"]: element.msg });
-        });
-    };
-
-    userAuthentification = async () => {
-        let response = await AuthService.auth(this.state);
-        let data = await response.json();
-        if (response.ok) {
-            localStorage.setItem("token", data.token);
-            this.props.history.push("/");
-        } else {
-            this.setState({ errorMessage: data.message });
-        }
-    };
-
-    userRegistration = async () => {
-        let response = await AuthService.register(this.state);
-        let data = await response.json();
-        if (response.ok) {
-            this.userAuthentification();
-        } else {
-            this.errorsDisplay(data.errors);
-        }
-    };
-
-    async submit(e) {
-        e.preventDefault();
-        if (this.state.request === "authentificate") {
-            this.userAuthentification();
-        } else {
-            this.userRegistration();
-        }
-    }
-
     render() {
+        let body = {
+            firstname: this.state.firstname,
+            lastname: this.state.lastname,
+            password: this.state.password,
+            email: this.state.email
+        };
+
         return (
             <section id="login-page">
                 <div className="container-logs">
@@ -134,12 +80,20 @@ export default class Login extends Component {
                         <h1 id="title">{this.state.title}</h1>
                         <AuthContext.Consumer>
                             {context => (
-                                <form onSubmit={e => this.submit(e)}>
+                                <form
+                                    onSubmit={e =>
+                                        context.submit(
+                                            e,
+                                            body,
+                                            this.state.request
+                                        )
+                                    }
+                                >
                                     <div id="container-email-log">
                                         <div className="container-label">
                                             <label>Email</label>
                                             <label className="error-log">
-                                                {this.state.emailErrorMessage}
+                                                {context.emailErrorMessage}
                                             </label>
                                         </div>
                                         <input
@@ -152,12 +106,11 @@ export default class Login extends Component {
 
                                     <div id="container-name-log">
                                         <div className="container-label">
-                                            <label>Prénom</label>
+                                            <label onClick={context.logOut}>
+                                                Prénom {context.log}
+                                            </label>
                                             <label className="error-log">
-                                                {
-                                                    this.state
-                                                        .firstnameErrorMessage
-                                                }
+                                                {context.firstnameErrorMessage}
                                             </label>
                                         </div>
                                         <input
@@ -168,10 +121,7 @@ export default class Login extends Component {
                                         <div className="container-label">
                                             <label>Nom</label>
                                             <label className="error-log">
-                                                {
-                                                    this.state
-                                                        .lastnameErrorMessage
-                                                }
+                                                {context.lastnameErrorMessage}
                                             </label>
                                         </div>
                                         <input
@@ -185,10 +135,7 @@ export default class Login extends Component {
                                         <div className="container-label">
                                             <label>Mot de passe</label>
                                             <label className="error-log">
-                                                {
-                                                    this.state
-                                                        .passwordErrorMessage
-                                                }
+                                                {context.passwordErrorMessage}
                                             </label>
                                         </div>
                                         <input
@@ -198,7 +145,7 @@ export default class Login extends Component {
                                             onChange={e => this.handleChange(e)}
                                         />
                                         <label className="error-log">
-                                            {this.state.errorMessage}
+                                            {context.errorMessage}
                                         </label>
                                         <button type="submit" className="btn">
                                             {this.state.textButton}
