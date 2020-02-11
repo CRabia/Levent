@@ -33,7 +33,21 @@ export default class Header extends Component {
                             </Link>
                         </div>
                         {context.isAuth ? (
-                            <div></div>
+                            <div className="flex">
+                                <div className="item-nav vertical-center">
+                                    <Link to="/">
+                                        <p>{context.currentUserFirstname}</p>
+                                    </Link>
+                                </div>
+                                <div className="item-nav vertical-center">
+                                    <button
+                                        onClick={context.logOut}
+                                        className=" btn-rounded-100 btn-violet"
+                                    >
+                                        Déconnexion
+                                    </button>
+                                </div>
+                            </div>
                         ) : (
                             <div className="flex">
                                 <div className="item-nav vertical-center">

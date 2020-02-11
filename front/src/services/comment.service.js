@@ -5,8 +5,7 @@ export default class CommentService {
         let init = {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("token")}`
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(body)
         };

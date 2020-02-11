@@ -53,7 +53,11 @@ router.post(
         check("lastname")
             .not()
             .isEmpty()
-            .withMessage("Merci de saisir votre nom")
+            .withMessage("Merci de saisir votre nom"),
+        check("content")
+            .not()
+            .isEmpty()
+            .withMessage("Merci de saisir votre message")
     ],
     CommentController.create
 );
