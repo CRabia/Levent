@@ -64,7 +64,7 @@ export class AuthProvider extends Component {
     };
 
     isLogIn = async () => {
-        let response = AuthService.isAuthenticated();
+        let response = await AuthService.isAuthenticated();
         response.ok ? this.logIn(await response.json()) : this.logOut();
     };
 

@@ -63,6 +63,7 @@ export default class AuthController {
             "-email -__v -password -lastname"
         );
         return res.status(200).json({
+            token: authorization,
             user: user,
             msg: "User is authenticated"
         });

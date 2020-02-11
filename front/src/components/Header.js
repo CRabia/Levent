@@ -23,27 +23,33 @@ export default class Header extends Component {
                 {context => (
                     <div id="menu" className={`${this.state.classMenu}`}>
                         <div className="item-nav vertical-center">
+                            <Link to="/">
+                                <p>Home</p>
+                            </Link>
+                        </div>
+                        <div className="item-nav vertical-center">
                             <Link to="/contact">
                                 <p>Contact</p>
                             </Link>
                         </div>
-                        {}
-
-                        {context.isAuth && <div>logged</div>}
-
-                        <div className="item-nav vertical-center">
-                            <Link to="/connexion">
-                                <p>Connexion</p>
-                            </Link>
-                        </div>
-
-                        <div className="item-nav vertical-center">
-                            <Link to="/inscription">
-                                <button className=" btn-rounded-100 btn-violet">
-                                    Inscription
-                                </button>
-                            </Link>
-                        </div>
+                        {context.isAuth ? (
+                            <div></div>
+                        ) : (
+                            <div className="flex">
+                                <div className="item-nav vertical-center">
+                                    <Link to="/connexion">
+                                        <p>Connexion</p>
+                                    </Link>
+                                </div>
+                                <div className="item-nav vertical-center">
+                                    <Link to="/inscription">
+                                        <button className=" btn-rounded-100 btn-violet">
+                                            Inscription
+                                        </button>
+                                    </Link>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 )}
             </AuthContext.Consumer>

@@ -3,36 +3,40 @@ $main-color-text: #304973;
 $color-error: #f93737;
 
 #root {
-  font-family: "Montserrat";
-  overflow-x: hidden;
+    font-family: "Montserrat";
+    overflow-x: hidden;
 }
 
 .vertical-center {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .btn-rounded-100 {
-  background-color: transparent;
-  color: white;
-  border-radius: 2rem;
-  border: 1px solid white;
-  padding: 8px 25px;
-  font-size: 18px;
-  cursor: pointer;
-  &:focus {
-    outline: none;
-  }
+    background-color: transparent;
+    color: white;
+    border-radius: 2rem;
+    border: 1px solid white;
+    padding: 8px 25px;
+    font-size: 18px;
+    cursor: pointer;
+    &:focus {
+        outline: none;
+    }
 }
 
 .btn-violet {
-  transition: 0.4s;
-  &:hover {
-    background-color: white;
-    color: #9c5fd4;
-    box-shadow: 2px 6px 12px rgba(0, 0, 0, 0.3);
-  }
+    transition: 0.4s;
+    &:hover {
+        background-color: white;
+        color: #9c5fd4;
+        box-shadow: 2px 6px 12px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.flex {
+    display: flex;
 }
 
 @import "./scss/Login.scss";
