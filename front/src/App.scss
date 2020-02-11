@@ -35,33 +35,6 @@ $color-error: #f93737;
   }
 }
 
-//header
-.opaque-nav-bar {
-  background-color: white;
-  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
-  height: 60px !important ;
-  .item-nav {
-    height: 60px !important;
-    a {
-      p {
-        color: $main-color-text !important;
-        font-size: 15px !important;
-      }
-      .btn-violet {
-        border-color: $main-color-text;
-        color: $main-color-text;
-        font-size: 15px !important;
-        &:hover {
-          border-color: #9c5fd4;
-          background: linear-gradient(35deg, #9c5fd4, #458bed) !important;
-          color: white;
-          box-shadow: none;
-        }
-      }
-    }
-  }
-}
-
 @import "./scss/Login.scss";
 @import "./scss/Contact.scss";
 @import "./scss/Home.scss";

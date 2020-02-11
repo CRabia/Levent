@@ -1,5 +1,5 @@
-import React, { Component, useEffect, useState } from "react";
-import { Router, Route, useLocation, Switch } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Router, Route } from "react-router-dom";
 import "./App.scss";
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";
@@ -46,40 +46,3 @@ const App = () => {
 };
 
 export default App;
-
-// export default class App extends Component {
-//   state = {
-//     renderHeader: true,
-//     renderFooter: true
-//   };
-
-//   componentDidMount() {
-//     this.displayNavigationLayout();
-//     customHistory.listen(() => {
-//       this.displayNavigationLayout();
-//     });
-//   }
-
-//   displayNavigationLayout() {
-//     !routes.includes(window.location.pathname)
-//       ? this.setState({ renderFooter: true, renderHeader: true })
-//       : this.setState({ renderFooter: false, renderHeader: false });
-//   }
-
-//   render() {
-//     return (
-//       <AuthProvider>
-//         <Router history={customHistory}>
-//           {this.state.renderHeader && <Header />}
-
-//           <Route path="/" exact component={Home} />
-//           <Route path="/contact" exact component={Contact} />
-//           <Route path="/inscription" exact component={Login} />
-//           <Route path="/connexion" exact component={Login} />
-
-//           {this.state.renderFooter && <Footer />}
-//         </Router>
-//       </AuthProvider>
-//     );
-//   }
-// }

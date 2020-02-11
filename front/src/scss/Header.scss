@@ -30,6 +30,29 @@
   }
 }
 
+.opaque-nav-bar {
+  background-color: rgba($color: #000000, $alpha: 0.4);
+  //box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  height: 60px !important ;
+  .item-nav {
+    height: 60px !important;
+    a {
+      p {
+        font-size: 15px !important;
+      }
+      .btn-violet {
+        font-size: 15px !important;
+        &:hover {
+          border-color: #9c5fd4;
+          background: linear-gradient(35deg, #9c5fd4, #458bed) !important;
+          color: white;
+          box-shadow: none;
+        }
+      }
+    }
+  }
+}
+
 .active-animation {
   left: 0 !important;
   .card-component {
