@@ -29,7 +29,7 @@ export class AuthProvider extends Component {
         currentUserRole: 0
     };
 
-    componentDidMount = () => {
+    componentDidMount = async () => {
         this.state.isAuth === null && this.isLogIn();
     };
 
@@ -82,6 +82,10 @@ export class AuthProvider extends Component {
         localStorage.removeItem("token");
     };
 
+    isAdmin = async () => {
+        return this.state.currentUserRole === 2;
+    };
+
     submit = async (e, body, request) => {
         e.preventDefault();
         this.resetErrorMessage();
@@ -99,6 +103,7 @@ export class AuthProvider extends Component {
                     submit: this.submit,
                     resetErrorMessage: this.resetErrorMessage,
                     logOut: this.logOut,
+                    isAdmin: this.isAdmin,
                     ...this.state
                 }}
             >
