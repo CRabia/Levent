@@ -8,20 +8,11 @@ export default class Contact extends Component {
             <div id="contact-page">
                 <section className="banner-home">
                     <div className="content">
-                        <img
-                            src={logo}
-                            className="logo"
-                            alt="Logo Levent - Contactez-nous"
-                        />
+                        <img src={logo} className="logo" alt="Logo Levent - Contactez-nous" />
                         <h1>Votre avis nous intéresse, alors contactez nous</h1>
-                        <p>
-                            Vous pouvez nous ecrire en utilisant le formulaire
-                            prévu à cet effet
-                        </p>
+                        <p>Vous pouvez nous ecrire en utilisant le formulaire prévu à cet effet</p>
                         <div className="container-button">
-                            <button className="btn-rounded-100 btn-violet">
-                                Plus d'information
-                            </button>
+                            <button className="btn-rounded-100 btn-violet">Plus d'information</button>
                         </div>
                     </div>
                     <div className="container-form">

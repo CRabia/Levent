@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../contexts/auth.context";
+import LogoutButton from "../components/buttons/LogoutButtonComponent";
+import NavigationTab from "../components/NavigationTabComponent";
 
 export default class Header extends Component {
     state = {
@@ -12,8 +14,7 @@ export default class Header extends Component {
     };
 
     handleScroll = e => {
-        const classMenu =
-            window.scrollY > 25 ? "opaque-nav-bar" : "transparent-nav-bar";
+        const classMenu = window.scrollY > 25 ? "opaque-nav-bar" : "transparent-nav-bar";
         this.setState({ classMenu });
     };
 
@@ -21,52 +22,21 @@ export default class Header extends Component {
         return (
             <AuthContext.Consumer>
                 {context => (
-                    <div id="menu" className={`${this.state.classMenu}`}>
-                        <div className="item-nav vertical-center">
-                            <Link to="/">
-                                <p>Home</p>
-                            </Link>
-                        </div>
-                        <div className="item-nav vertical-center">
-                            <Link to="/contact">
-                                <p>Contact</p>
-                            </Link>
-                        </div>
-                        {context.isAdmin && (
-                            <div className="item-nav vertical-center">
-                                <Link to="/admin/dashboard">
-                                    <p>dashboard</p>
-                                </Link>
-                            </div>
-                        )}
+                    <div id="menu" className={`${this.state.classMenu} ${this.props.theme}`}>
+                        <NavigationTab name="Home" path="/" />
+                        <NavigationTab name="Contact" path="/contact" />
+                        {context.isAdmin && <NavigationTab name="Dashboard" path="/admin/dasboard" />}
                         {context.isAuth ? (
                             <div className="flex">
-                                <div className="item-nav vertical-center">
-                                    <Link to="/">
-                                        <p>{context.currentUserFirstname}</p>
-                                    </Link>
-                                </div>
-                                <div className="item-nav vertical-center">
-                                    <button
-                                        onClick={context.logOut}
-                                        className=" btn-rounded-100 btn-violet"
-                                    >
-                                        Déconnexion
-                                    </button>
-                                </div>
+                                <NavigationTab name={context.currentUserFirstname} path="/" />
+                                <LogoutButton theme="light" />
                             </div>
                         ) : (
                             <div className="flex">
-                                <div className="item-nav vertical-center">
-                                    <Link to="/connexion">
-                                        <p>Connexion</p>
-                                    </Link>
-                                </div>
+                                <NavigationTab name="Connexion" path="/connexion" />
                                 <div className="item-nav vertical-center">
                                     <Link to="/inscription">
-                                        <button className=" btn-rounded-100 btn-violet">
-                                            Inscription
-                                        </button>
+                                        <button className=" btn-rounded-100 btn-violet">Inscription</button>
                                     </Link>
                                 </div>
                             </div>

@@ -94,7 +94,7 @@ export class AuthProvider extends Component {
     submit = async (e, body, request) => {
         e.preventDefault();
         this.resetErrorMessage();
-        if (request === "authentificate") {
+        if (request === "authenticate") {
             this.userAuthentication(body);
         } else {
             this.userRegistration(body);

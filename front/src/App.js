@@ -6,9 +6,9 @@ import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import AdminDasboard from "./pages/admin/Dashboard";
 import Header from "./components/Header";
-import HeaderAdmin from "./components/admin/HeaderAdminComponent";
+import HeaderAdmin from "./components/HeaderAdminComponent";
 import Footer from "./components/Footer";
-import { ProtectedRoute } from "./protected.route";
+import { AdminRoute } from "./admin.route";
 import { AuthProvider } from "./contexts/auth.context";
 import { createBrowserHistory } from "history";
 
@@ -37,33 +37,24 @@ const App = () => {
         } else {
             setRenderFooter(false);
             setRenderHeader(false);
-            customHistory.location.pathname.includes(motifRoutesAdmin) &&
-                setRenderHeaderAdmin(true);
+            customHistory.location.pathname.includes(motifRoutesAdmin) && setRenderHeaderAdmin(true);
         }
     };
 
     return (
         <AuthProvider>
             <Router history={customHistory}>
-                {renderHeader && <Header />}
-                {renderHeaderAdmin && <HeaderAdmin />}
+                {renderHeader && <Header theme="light" />}
+                {renderHeaderAdmin && <HeaderAdmin theme="opaque" />}
 
                 <Route path="/" exact component={Home} />
                 <Route path="/contact" exact component={Contact} />
                 <Route path="/inscription" exact component={Login} />
                 <Route path="/connexion" exact component={Login} />
 
-                <ProtectedRoute
-                    exact
-                    path="/admin/dashboard"
-                    component={AdminDasboard}
-                />
+                <AdminRoute exact path="/admin/dashboard" component={AdminDasboard} />
 
-                <ProtectedRoute
-                    exact
-                    path="/admin/user"
-                    component={AdminDasboard}
-                />
+                <AdminRoute exact path="/admin/user" component={AdminDasboard} />
                 {renderFooter && <Footer />}
             </Router>
         </AuthProvider>

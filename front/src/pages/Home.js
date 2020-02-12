@@ -9,23 +9,17 @@ export default class Home extends Component {
     }
 
     animationSlideTop = () => {
-        document
-            .getElementById("position-top")
-            .classList.toggle("active-animation");
+        document.getElementById("position-top").classList.toggle("active-animation");
         setTimeout(this.animationSlideMiddle, 500);
     };
 
     animationSlideMiddle = () => {
-        document
-            .getElementById("position-middle")
-            .classList.toggle("active-animation");
+        document.getElementById("position-middle").classList.toggle("active-animation");
         setTimeout(this.animationSlideBottom, 500);
     };
 
     animationSlideBottom = () => {
-        document
-            .getElementById("position-bottom")
-            .classList.toggle("active-animation");
+        document.getElementById("position-bottom").classList.toggle("active-animation");
     };
 
     render() {
@@ -38,18 +32,11 @@ export default class Home extends Component {
                             className="logo"
                             alt="Logo Levent - Découvrez les activitées près de chez vous."
                         />
-                        <h1>
-                            Découvrez toutes les activitées près de chez vous
-                        </h1>
-                        <p>
-                            En vous inscrivant vous pourrez participer à pleins
-                            d'activitées près de chez vous !
-                        </p>
+                        <h1>Découvrez toutes les activitées près de chez vous</h1>
+                        <p>En vous inscrivant vous pourrez participer à pleins d'activitées près de chez vous !</p>
                         <div className="container-button">
                             <Link to="/inscription">
-                                <button className="btn-rounded-100 btn-violet">
-                                    Inscrivez-vous
-                                </button>
+                                <button className="btn-rounded-100 btn-violet">Inscrivez-vous</button>
                             </Link>
                         </div>
                     </div>

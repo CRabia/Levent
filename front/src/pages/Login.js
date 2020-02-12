@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AuthContext from "../contexts/auth.context";
+import LoginDto from "../dto/LoginDto";
 
 const modelConnect = {
     title: "Connexion",
@@ -21,7 +22,7 @@ export default class Login extends Component {
         firstname: "",
         lastname: "",
         password: "",
-        request: "authentificate",
+        request: "authenticate",
         title: "Connexion",
         textButton: "Connexion",
         textUnderButton: ["Vous n'êtes pas encore inscrit ? ", "Inscrivez-vous"]
@@ -44,18 +45,10 @@ export default class Login extends Component {
     };
 
     animationForm = () => {
-        document
-            .getElementById("container-email-log")
-            .classList.toggle("animation-email-register");
-        document
-            .getElementById("container-password-log")
-            .classList.toggle("animation-password-register");
-        document
-            .getElementById("container-name-log")
-            .classList.toggle("animation-name-register");
-        document
-            .getElementById("title")
-            .classList.toggle("animation-title-register");
+        document.getElementById("container-email-log").classList.toggle("animation-email-register");
+        document.getElementById("container-password-log").classList.toggle("animation-password-register");
+        document.getElementById("container-name-log").classList.toggle("animation-name-register");
+        document.getElementById("title").classList.toggle("animation-title-register");
     };
 
     changeTextOfThePage = () => {
@@ -67,12 +60,7 @@ export default class Login extends Component {
     };
 
     render() {
-        let body = {
-            firstname: this.state.firstname,
-            lastname: this.state.lastname,
-            password: this.state.password,
-            email: this.state.email
-        };
+        const dto = Object.assign(new LoginDto(), this.state);
 
         return (
             <section id="login-page">
@@ -81,61 +69,32 @@ export default class Login extends Component {
                         <h1 id="title">{this.state.title}</h1>
                         <AuthContext.Consumer>
                             {context => (
-                                <form
-                                    onSubmit={e =>
-                                        context.submit(
-                                            e,
-                                            body,
-                                            this.state.request
-                                        )
-                                    }
-                                >
+                                <form onSubmit={e => context.submit(e, dto, this.state.request)}>
                                     <div id="container-email-log">
                                         <div className="container-label">
                                             <label>Email</label>
-                                            <label className="error-log">
-                                                {context.emailErrorMessage}
-                                            </label>
+                                            <label className="error-log">{context.emailErrorMessage}</label>
                                         </div>
-                                        <input
-                                            type="text"
-                                            id="email"
-                                            required
-                                            onChange={e => this.handleChange(e)}
-                                        />
+                                        <input type="text" id="email" required onChange={e => this.handleChange(e)} />
                                     </div>
 
                                     <div id="container-name-log">
                                         <div className="container-label">
                                             <label>Prénom</label>
-                                            <label className="error-log">
-                                                {context.firstnameErrorMessage}
-                                            </label>
+                                            <label className="error-log">{context.firstnameErrorMessage}</label>
                                         </div>
-                                        <input
-                                            type="text"
-                                            id="firstname"
-                                            onChange={e => this.handleChange(e)}
-                                        />
+                                        <input type="text" id="firstname" onChange={e => this.handleChange(e)} />
                                         <div className="container-label">
                                             <label>Nom</label>
-                                            <label className="error-log">
-                                                {context.lastnameErrorMessage}
-                                            </label>
+                                            <label className="error-log">{context.lastnameErrorMessage}</label>
                                         </div>
-                                        <input
-                                            type="text"
-                                            id="lastname"
-                                            onChange={e => this.handleChange(e)}
-                                        />
+                                        <input type="text" id="lastname" onChange={e => this.handleChange(e)} />
                                     </div>
 
                                     <div id="container-password-log">
                                         <div className="container-label">
                                             <label>Mot de passe</label>
-                                            <label className="error-log">
-                                                {context.passwordErrorMessage}
-                                            </label>
+                                            <label className="error-log">{context.passwordErrorMessage}</label>
                                         </div>
                                         <input
                                             type="password"
@@ -143,24 +102,13 @@ export default class Login extends Component {
                                             required
                                             onChange={e => this.handleChange(e)}
                                         />
-                                        <label className="error-log">
-                                            {context.errorMessage}
-                                        </label>
+                                        <label className="error-log">{context.errorMessage}</label>
                                         <button type="submit" className="btn">
                                             {this.state.textButton}
                                         </button>
-                                        <p
-                                            id="textConnection"
-                                            className="underButton"
-                                        >
+                                        <p id="textConnection" className="underButton">
                                             {this.state.textUnderButton[0]}
-                                            <span
-                                                onClick={() =>
-                                                    this.changePageLog(
-                                                        context.resetErrorMessage
-                                                    )
-                                                }
-                                            >
+                                            <span onClick={() => this.changePageLog(context.resetErrorMessage)}>
                                                 {this.state.textUnderButton[1]}
                                             </span>
                                         </p>
