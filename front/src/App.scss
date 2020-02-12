@@ -4,6 +4,13 @@ $color-error: #f93737;
 $main-violet: #9c5fd4;
 $main-blue: #458bed;
 
+//color admin
+$main-color-admin-background: #f2f6fa;
+$main-color-admin-disabled: #7e8e9e;
+$main-color-admin-hover: #d8dde4;
+$main-color-admin-text: #27425f;
+$main-color-admin-selected: #4036ae;
+
 #root {
     font-family: "Montserrat";
     overflow-x: hidden;
@@ -41,8 +48,15 @@ $main-blue: #458bed;
     display: flex;
 }
 
+.template-admin {
+    padding: 75px 0 15px;
+    background-color: $main-color-admin-background;
+    min-height: calc(100vh - 90px);
+}
+
 @import "./scss/Login.scss";
 @import "./scss/Contact.scss";
 @import "./scss/Home.scss";
 @import "./scss/Header.scss";
 @import "./scss/admin/HeaderAdmin.scss";
+@import "./scss/admin/Dashboard.scss";

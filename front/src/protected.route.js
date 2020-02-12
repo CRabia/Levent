@@ -12,7 +12,8 @@ export const ProtectedRoute = ({ component: Component, ...rest }) => {
                         if (context.isAdmin) {
                             return <Component {...props} />;
                         } else {
-                            return <Redirect to="/connexion" />;
+                            return <Component {...props} />;
+                            //return <Redirect to="/connexion" />;
                         }
                     }}
                 />

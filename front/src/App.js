@@ -6,11 +6,11 @@ import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import AdminDasboard from "./pages/admin/Dashboard";
 import Header from "./components/Header";
+import HeaderAdmin from "./components/admin/HeaderAdminComponent";
 import Footer from "./components/Footer";
-//import { ProtectedRoute } from "./protected.route";
+import { ProtectedRoute } from "./protected.route";
 import { AuthProvider } from "./contexts/auth.context";
 import { createBrowserHistory } from "history";
-import HeaderAdmin from "./components/admin/HeaderAdminComponent";
 
 const routes = ["/connexion", "/inscription"];
 const motifRoutesAdmin = "/admin";
@@ -47,20 +47,23 @@ const App = () => {
             <Router history={customHistory}>
                 {renderHeader && <Header />}
                 {renderHeaderAdmin && <HeaderAdmin />}
+
                 <Route path="/" exact component={Home} />
                 <Route path="/contact" exact component={Contact} />
                 <Route path="/inscription" exact component={Login} />
                 <Route path="/connexion" exact component={Login} />
-                <Route
-                    path="/admin/dashboard"
+
+                <ProtectedRoute
                     exact
+                    path="/admin/dashboard"
                     component={AdminDasboard}
                 />
-                {/*<ProtectedRoute
+
+                <ProtectedRoute
                     exact
-                    path="/admin/dashboard"
+                    path="/admin/user"
                     component={AdminDasboard}
-                />*/}
+                />
                 {renderFooter && <Footer />}
             </Router>
         </AuthProvider>
