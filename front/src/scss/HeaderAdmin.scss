@@ -1,0 +1,18 @@
+#menu-admin {
+    display: block;
+    background: white;
+    height: 73px;
+    width: 100%;
+    box-shadow: 0 4px 12px $main-color-admin-hover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1024;
+    display: flex;
+    justify-content: space-between;
+    .logo {
+        width: auto;
+        height: 55px;
+        margin: 0 0 0 50px;
+    }
+}
