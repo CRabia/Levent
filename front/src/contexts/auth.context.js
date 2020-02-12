@@ -13,6 +13,7 @@ const modelErrorMessage = {
 
 const modelLogOut = {
     isAuth: false,
+    isAdmin: false,
     currentUserFirstname: "",
     currentUserRole: 0
 };
@@ -25,12 +26,15 @@ export class AuthProvider extends Component {
         lastnameErrorMessage: "",
         passwordErrorMessage: "",
         isAuth: null,
+        isAdmin: false,
         currentUserFirstname: "",
         currentUserRole: 0
     };
 
     componentDidMount = async () => {
-        this.state.isAuth === null && this.isLogIn();
+        if (this.state.isAuth === null) {
+            this.isLogIn();
+        }
     };
 
     resetErrorMessage = () => {
@@ -66,6 +70,7 @@ export class AuthProvider extends Component {
     isLogIn = async () => {
         let response = await AuthService.isAuthenticated();
         response.ok ? this.logIn(await response.json()) : this.logOut();
+        this.isUserAdmin();
     };
 
     logIn = data => {
@@ -82,8 +87,8 @@ export class AuthProvider extends Component {
         localStorage.removeItem("token");
     };
 
-    isAdmin = async () => {
-        return this.state.currentUserRole === 2;
+    isUserAdmin = () => {
+        this.state.currentUserRole === 2 && this.setState({ isAdmin: true });
     };
 
     submit = async (e, body, request) => {

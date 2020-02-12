@@ -1,0 +1,22 @@
+import React from "react";
+import { Route, Redirect } from "react-router-dom";
+import AuthContext from "./contexts/auth.context";
+
+export const ProtectedRoute = ({ component: Component, ...rest }) => {
+    return (
+        <AuthContext.Consumer>
+            {context => (
+                <Route
+                    {...rest}
+                    render={props => {
+                        if (context.isAdmin) {
+                            return <Component {...props} />;
+                        } else {
+                            return <Redirect to="/connexion" />;
+                        }
+                    }}
+                />
+            )}
+        </AuthContext.Consumer>
+    );
+};

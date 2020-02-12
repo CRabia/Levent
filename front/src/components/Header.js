@@ -32,6 +32,13 @@ export default class Header extends Component {
                                 <p>Contact</p>
                             </Link>
                         </div>
+                        {context.isAdmin && (
+                            <div className="item-nav vertical-center">
+                                <Link to="/admin/dashboard">
+                                    <p>dashboard</p>
+                                </Link>
+                            </div>
+                        )}
                         {context.isAuth ? (
                             <div className="flex">
                                 <div className="item-nav vertical-center">

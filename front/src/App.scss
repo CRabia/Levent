@@ -1,6 +1,8 @@
 //color
 $main-color-text: #304973;
 $color-error: #f93737;
+$main-violet: #9c5fd4;
+$main-blue: #458bed;
 
 #root {
     font-family: "Montserrat";
@@ -43,3 +45,4 @@ $color-error: #f93737;
 @import "./scss/Contact.scss";
 @import "./scss/Home.scss";
 @import "./scss/Header.scss";
+@import "./scss/admin/HeaderAdmin.scss";
