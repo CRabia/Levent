@@ -7,7 +7,7 @@ const NavigationTab = props => {
     let location = useLocation();
 
     useEffect(() => {
-        location.pathname == props.path ? setNavigationTabActive("activated-tab-nav") : setNavigationTabActive("");
+        location.pathname === props.path ? setNavigationTabActive("activated-tab-nav") : setNavigationTabActive("");
     }, [location.pathname]);
 
     return (

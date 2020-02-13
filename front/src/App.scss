@@ -4,6 +4,13 @@ $color-error: #f93737;
 $main-violet: #9c5fd4;
 $main-blue: #458bed;
 
+//gradient
+$first-color: #ffad5e;
+$second-color: #f68fa2;
+$third-color: #db7cd5;
+$fourth-color: #a194cf;
+$fifth-color: #00b3cc;
+
 //color admin
 $main-color-admin-background: #f2f6fa;
 $main-color-admin-disabled: #7e8e9e;
@@ -51,7 +58,7 @@ $main-color-admin-selected: #4036ae;
 }
 
 .template-admin {
-    padding: 75px 0 15px;
+    padding: 75px 25px 15px 25px;
     background-color: $main-color-admin-background;
     min-height: calc(100vh - 90px);
 }

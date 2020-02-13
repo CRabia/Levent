@@ -6,9 +6,10 @@ const HeaderAdmin = props => {
     return (
         <nav id="menu" className={`${props.theme}`}>
             <NavigationTab name="Dashboard" path="/admin/dashboard" />
-            <NavigationTab name="User" path="/admin/user" />
-            <NavigationTab name="Comment" path="/admin/comment" />
-            <NavigationTab name="Event" path="/admin/event" />
+            <NavigationTab name="Utilisateur" path="/admin/user" />
+            <NavigationTab name="Commentaire" path="/admin/comment" />
+            <NavigationTab name="Categorie" path="/admin/category" />
+            <NavigationTab name="Evénement" path="/admin/event" />
             <LogoutButton />
         </nav>
     );

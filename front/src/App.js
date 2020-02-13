@@ -53,8 +53,11 @@ const App = () => {
                 <Route path="/connexion" exact component={Login} />
 
                 <AdminRoute exact path="/admin/dashboard" component={AdminDasboard} />
-
                 <AdminRoute exact path="/admin/user" component={AdminDasboard} />
+                <AdminRoute exact path="/admin/comment" component={AdminDasboard} />
+                <AdminRoute exact path="/admin/event" component={AdminDasboard} />
+                <AdminRoute exact path="/admin/category" component={AdminDasboard} />
+
                 {renderFooter && <Footer />}
             </Router>
         </AuthProvider>
