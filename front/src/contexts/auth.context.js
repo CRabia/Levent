@@ -37,21 +37,12 @@ export class AuthProvider extends Component {
         }
     };
 
-    resetErrorMessage = () => {
-        this.setState(modelErrorMessage);
-    };
-
-    errorsDisplay = errors => {
-        errors.forEach(element => {
-            this.setState({ [element.param + "ErrorMessage"]: element.msg });
-        });
-    };
-
     userAuthentication = async body => {
         let response = await AuthService.auth(body);
         let data = await response.json();
         if (response.ok) {
             this.logIn(data);
+            this.props.customHistory.push("/");
         } else {
             this.setState({ errorMessage: data.message });
         }
@@ -67,12 +58,6 @@ export class AuthProvider extends Component {
         }
     };
 
-    isLogIn = async () => {
-        let response = await AuthService.isAuthenticated();
-        response.ok ? this.logIn(await response.json()) : this.logOut();
-        this.isUserAdmin();
-    };
-
     logIn = data => {
         localStorage.setItem("token", data.token);
         this.setState({
@@ -80,16 +65,40 @@ export class AuthProvider extends Component {
             currentUserRole: data.user.user_role,
             isAuth: true
         });
+        this.isUserAdmin();
     };
 
     logOut = () => {
         this.setState(modelLogOut);
         localStorage.removeItem("token");
+        this.props.customHistory.push("/");
     };
+
+    //Functions to check the user status
 
     isUserAdmin = () => {
         this.state.currentUserRole === 2 && this.setState({ isAdmin: true });
     };
+
+    isLogIn = async () => {
+        let response = await AuthService.isAuthenticated();
+        response.ok ? this.logIn(await response.json()) : this.logOut();
+        this.isUserAdmin();
+    };
+
+    //Functions to display errors when user tries to register/log in
+
+    resetErrorMessage = () => {
+        this.setState(modelErrorMessage);
+    };
+
+    errorsDisplay = errors => {
+        errors.forEach(element => {
+            this.setState({ [element.param + "ErrorMessage"]: element.msg });
+        });
+    };
+
+    //Function to start register/connect user
 
     submit = async (e, body, request) => {
         e.preventDefault();

@@ -42,7 +42,7 @@ const App = () => {
     };
 
     return (
-        <AuthProvider>
+        <AuthProvider customHistory={customHistory}>
             <Router history={customHistory}>
                 {renderHeader && <Header theme="light" />}
                 {renderHeaderAdmin && <HeaderAdmin theme="opaque" />}

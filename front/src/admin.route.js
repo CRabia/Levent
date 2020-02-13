@@ -1,5 +1,5 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import AuthContext from "./contexts/auth.context";
 
 export const AdminRoute = ({ component: Component, ...rest }) => {
