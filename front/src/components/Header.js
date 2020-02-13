@@ -25,7 +25,7 @@ export default class Header extends Component {
                     <div id="menu" className={`${this.state.classMenu} ${this.props.theme}`}>
                         <NavigationTab name="Home" path="/" />
                         <NavigationTab name="Contact" path="/contact" />
-                        {context.isAdmin && <NavigationTab name="Dashboard" path="/admin/dasboard" />}
+                        {context.isAdmin && <NavigationTab name="Dashboard" path="/admin/dashboard" />}
                         {context.isAuth ? (
                             <div className="flex">
                                 <NavigationTab name={context.currentUserFirstname} path="/" />

@@ -44,7 +44,7 @@ const App = () => {
     return (
         <AuthProvider customHistory={customHistory}>
             <Router history={customHistory}>
-                {renderHeader && <Header theme="light" />}
+                {renderHeader && <Header theme="transparent" />}
                 {renderHeaderAdmin && <HeaderAdmin theme="opaque" />}
 
                 <Route path="/" exact component={Home} />

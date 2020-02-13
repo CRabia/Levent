@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AuthContext from "../../contexts/auth.context";
 
-const LogoutButton = props => {
+const LogoutButton = () => {
     return (
         <AuthContext.Consumer>
             {context => (
