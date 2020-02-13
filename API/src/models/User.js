@@ -20,6 +20,10 @@ const userSchema = new mongoose.Schema({
   user_role: {
     type: Number,
     default: 1
+  },
+  created_on: {
+    type: Date,
+    required: true
   }
 });
 

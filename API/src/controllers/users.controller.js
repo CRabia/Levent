@@ -21,7 +21,8 @@ export default class UserController {
         firstname: req.body.firstname,
         lastname: req.body.lastname,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        created_on: new Date()
       });
 
       body = {
@@ -123,6 +124,28 @@ export default class UserController {
       );
 
       body = { user, message: "User was updated" };
+    } catch (error) {
+      status = 500;
+      body = { message: error.message };
+    }
+
+    return res.status(status).json(body);
+  }
+
+  /**
+   * Find user registered in the month
+   * @param {Request} req
+   * @param {Response} res
+   */
+  static async UserRegisteredInMonth(req, res) {
+    let status = 200;
+    let body = {};
+
+    try {
+      let users = User.find({
+        created_on: { $gte: new Date(2012, 7, 14), $lt: new Date(2012, 7, 15) }
+      });
+      body = { users, message: "Users registered in th month" };
     } catch (error) {
       status = 500;
       body = { message: error.message };

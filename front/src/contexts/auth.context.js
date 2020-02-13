@@ -70,8 +70,7 @@ export class AuthProvider extends Component {
 
     logOut = () => {
         this.setState(modelLogOut);
-        localStorage.removeItem("token");
-        this.props.customHistory.push("/");
+        localStorage.getItem("token") && localStorage.removeItem("token") && this.props.customHistory.push("/");
     };
 
     //Functions to check the user status

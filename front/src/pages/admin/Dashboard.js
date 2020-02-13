@@ -3,12 +3,18 @@ import UserService from "../../services/user.service";
 
 const Dasboard = () => {
     const [countUser, setCountUser] = useState(0);
+    const [countUserPerMonth, setCountUserPerMonth] = useState(0);
 
     const getUserStatistic = async () => {
         let response = await UserService.list();
         if (response.ok) {
             let data = await response.json();
             setCountUser(data.users.length);
+        }
+        response = await UserService.getUserRegisteredInMonth();
+        if (response.ok) {
+            let data = await response.json();
+            setCountUserPerMonth(data.users.length);
         }
     };
 
@@ -26,6 +32,8 @@ const Dasboard = () => {
                         <div className="para-statistic">
                             <label>Nombre d'utilisateur sur la plateforme :</label>
                             <p>{countUser}</p>
+                            <label>Nombre d'utilisateur inscrit ce mois-ci :</label>
+                            <p>{countUserPerMonth}</p>
                         </div>
                     </div>
                 </div>
