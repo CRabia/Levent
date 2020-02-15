@@ -9,7 +9,7 @@ import Header from "./components/Header";
 import HeaderAdmin from "./components/HeaderAdminComponent";
 import Footer from "./components/Footer";
 import { AdminRoute } from "./admin.route";
-import { AuthProvider } from "./contexts/auth.context";
+import AuthContext, { AuthProvider } from "./contexts/auth.context";
 import { createBrowserHistory } from "history";
 
 const routes = ["/connexion", "/inscription"];
@@ -45,18 +45,24 @@ const App = () => {
         <AuthProvider customHistory={customHistory}>
             <Router history={customHistory}>
                 {renderHeader && <Header theme="transparent" />}
-                {renderHeaderAdmin && <HeaderAdmin theme="opaque" />}
+
+                <AuthContext.Consumer>
+                    {context => (
+                        <div id="template-admin">
+                            {renderHeaderAdmin && <HeaderAdmin theme="vertical" />}
+                            <AdminRoute exact path="/admin/dashboard" component={AdminDasboard} />
+                            <AdminRoute exact path="/admin/user" component={AdminDasboard} />
+                            <AdminRoute exact path="/admin/comment" component={AdminDasboard} />
+                            <AdminRoute exact path="/admin/event" component={AdminDasboard} />
+                            <AdminRoute exact path="/admin/category" component={AdminDasboard} />
+                        </div>
+                    )}
+                </AuthContext.Consumer>
 
                 <Route path="/" exact component={Home} />
                 <Route path="/contact" exact component={Contact} />
                 <Route path="/inscription" exact component={Login} />
                 <Route path="/connexion" exact component={Login} />
-
-                <AdminRoute exact path="/admin/dashboard" component={AdminDasboard} />
-                <AdminRoute exact path="/admin/user" component={AdminDasboard} />
-                <AdminRoute exact path="/admin/comment" component={AdminDasboard} />
-                <AdminRoute exact path="/admin/event" component={AdminDasboard} />
-                <AdminRoute exact path="/admin/category" component={AdminDasboard} />
 
                 {renderFooter && <Footer />}
             </Router>

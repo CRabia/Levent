@@ -6,7 +6,7 @@ const modelConnect = {
     title: "Connexion",
     textButton: "Connexion",
     textUnderButton: ["Vous n'êtes pas encore inscrit ? ", "Inscrivez-vous"],
-    request: "authentificate"
+    request: "authenticate"
 };
 
 const modelRegister = {

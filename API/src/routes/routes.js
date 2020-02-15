@@ -35,7 +35,6 @@ router.post(
 );
 
 router.get("/users", UserController.list);
-router.get("/users/month", UserController.UserRegisteredInMonth);
 router.get("/users/:id", UserController.details);
 router.delete("/users/:id", UserController.delete);
 router.put("/users/:id", UserController.update);

@@ -49,16 +49,4 @@ export default class UserService {
         let call = await fetch(`${baseUrl}/users/${id}`, init);
         return call;
     }
-
-    static async getUserRegisteredInMonth() {
-        let init = {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("token")}`
-            }
-        };
-        let call = await fetch(`${baseUrl}/users/month`, init);
-        return call;
-    }
 }
