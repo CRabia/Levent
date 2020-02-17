@@ -34,14 +34,14 @@ const Dasboard = () => {
                     <div className="item-header pink">
                         <div className="illustration"></div>
                         <div className="content">
-                            <h3>Utilisateurs</h3>
+                            <h3>Nouveaux commentaires</h3>
                             <p>0</p>
                         </div>
                     </div>
                     <div className="item-header violet">
                         <div className="illustration"></div>
                         <div className="content">
-                            <h3>Utilisateurs</h3>
+                            <h3>Evènements</h3>
                             <p>0</p>
                         </div>
                     </div>
@@ -59,9 +59,14 @@ const Dasboard = () => {
                     <div className="box inset">
                         <h2>Utilisateur</h2>
                         <div className="para-statistic">
-                            <label>Nombre d'utilisateur sur la plateforme :</label>
+                            <label>
+                                Nombre d'utilisateur sur la plateforme :
+                            </label>
                             <p>{countUser}</p>
-                            <label>Nombre d'utilisateur participant à des événements :</label>
+                            <label>
+                                Nombre d'utilisateur participant à des
+                                événements :
+                            </label>
                             <p>{countUserParticipatedEvent}</p>
                         </div>
                     </div>
@@ -98,9 +103,14 @@ const Dasboard = () => {
                     <div className="box inset">
                         <h2>Utilisateur</h2>
                         <div className="para-statistic">
-                            <label>Nombre d'utilisateur sur la plateforme :</label>
+                            <label>
+                                Nombre d'utilisateur sur la plateforme :
+                            </label>
                             <p>{countUser}</p>
-                            <label>Nombre d'utilisateur participant à des événements :</label>
+                            <label>
+                                Nombre d'utilisateur participant à des
+                                événements :
+                            </label>
                             <p>{countUserParticipatedEvent}</p>
                         </div>
                     </div>

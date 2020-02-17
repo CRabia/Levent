@@ -1,9 +1,4 @@
 #dashboard-admin {
-  color: $main-color-admin-text;
-  h1 {
-    font-size: 46px;
-    margin: 25px 15px 50px 15px;
-  }
 }
 
 .part-page {
@@ -39,8 +34,8 @@
 }
 
 .container-header-part {
-  max-width: 100%;
-  overflow: hidden;
+  overflow: auto;
+  width: calc(100% - 350px);
   .header-part {
     display: flex;
     .item-header {
