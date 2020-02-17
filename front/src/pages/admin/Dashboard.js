@@ -3,7 +3,7 @@ import UserService from "../../services/user.service";
 
 const Dasboard = () => {
     const [countUser, setCountUser] = useState(0);
-    const [countUserParticipatedEvent, setCountUserPerMonth] = useState(0);
+    const [countUserParticipatedEvent, setCountUserParticipatedEvent] = useState(0);
     const [countEvent, setCountEvent] = useState(0);
     const [countCategory, setCountCategory] = useState(0);
 
@@ -48,7 +48,7 @@ const Dasboard = () => {
                     <div className="item-header blue">
                         <div className="illustration"></div>
                         <div className="content">
-                            <h3>Utilisateurs</h3>
+                            <h3>Catégorie</h3>
                             <p>0</p>
                         </div>
                     </div>
@@ -59,20 +59,44 @@ const Dasboard = () => {
                     <div className="box inset">
                         <h2>Utilisateur</h2>
                         <div className="para-statistic">
-                            <label>
-                                Nombre d'utilisateur sur la plateforme :
-                            </label>
+                            <label>Nombre d'utilisateur sur la plateforme :</label>
                             <p>{countUser}</p>
-                            <label>
-                                Nombre d'utilisateur participant à des
-                                événements :
-                            </label>
+                        </div>
+                        <div className="para-statistic">
+                            <label>Nombre d'utilisateur participant à des événements :</label>
                             <p>{countUserParticipatedEvent}</p>
                         </div>
+                        <div className="para-statistic">
+                            <label>Voici les derniers inscrits :</label>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>Nom</td>
+                                        <td>Prénom</td>
+                                        <td>Voir</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nom</td>
+                                        <td>Prénom</td>
+                                        <td>Voir</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nom</td>
+                                        <td>Prénom</td>
+                                        <td>Voir</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nom</td>
+                                        <td>Prénom</td>
+                                        <td>Voir</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <div className="column">
-                    <div className="box">
+                    <div className="box white">
                         <h2>Evènement</h2>
                         <div className="para-statistic">
                             <label>Nombre d'évènements :</label>
@@ -83,35 +107,15 @@ const Dasboard = () => {
                             <p>{countCategory}</p>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div className="part-page">
-                <div className="column">
-                    <div className="box">
-                        <h2>Evènement</h2>
-                        <div className="para-statistic">
-                            <label>Nombre d'évènements :</label>
-                            <p>{countEvent}</p>
-                        </div>
-                        <div className="para-statistic">
-                            <label>Nombre de catérorie :</label>
-                            <p>{countCategory}</p>
-                        </div>
-                    </div>
-                </div>
-                <div className="column">
-                    <div className="box inset">
+                    <div className="box white">
                         <h2>Utilisateur</h2>
                         <div className="para-statistic">
-                            <label>
-                                Nombre d'utilisateur sur la plateforme :
-                            </label>
+                            <label>Nombre d'utilisateur sur la plateforme :</label>
                             <p>{countUser}</p>
-                            <label>
-                                Nombre d'utilisateur participant à des
-                                événements :
-                            </label>
-                            <p>{countUserParticipatedEvent}</p>
+                        </div>
+                        <div className="para-statistic">
+                            <label>Nombre d'utilisateur sur la plateforme :</label>
+                            <p>{countUser}</p>
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import NavigationTab from "./NavigationTabComponent";
-import arrow from "../arrow.png";
-import burger from "../burger.png";
+import arrow from "../assets/img/arrow.png";
+import burger from "../assets/img/burger.png";
 
 const HeaderAdmin = props => {
     const [headerHidden, setHeaderHidden] = useState(false);

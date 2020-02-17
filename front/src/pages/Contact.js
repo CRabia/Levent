@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import logo from "../logo.png";
+import logo from "../assets/img/logo.png";
 import FormContact from "../components/FormContactComponent";
 
 export default class Contact extends Component {

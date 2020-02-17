@@ -14,52 +14,52 @@ router.post("/users/authenticated", AuthController.isAuthenticated);
 
 // Users routes
 router.post(
-  "/user",
-  [
-    check("email")
-      .isEmail()
-      .withMessage("L'email est incorrect"),
-    check("password")
-      .isLength({ min: 5 })
-      .withMessage("Le mot de passe est trop court (min 5*)"),
-    check("firstname")
-      .not()
-      .isEmpty()
-      .withMessage("Merci de saisir votre prénom"),
-    check("lastname")
-      .not()
-      .isEmpty()
-      .withMessage("Merci de saisir votre nom")
-  ],
-  UserController.create
+    "/user",
+    [
+        check("email")
+            .isEmail()
+            .withMessage("L'email est incorrect"),
+        check("password")
+            .isLength({ min: 5 })
+            .withMessage("Le mot de passe est trop court (min 5*)"),
+        check("firstname")
+            .not()
+            .isEmpty()
+            .withMessage("Merci de saisir votre prénom"),
+        check("lastname")
+            .not()
+            .isEmpty()
+            .withMessage("Merci de saisir votre nom")
+    ],
+    UserController.create
 );
 
-router.get("/users", UserController.list);
-router.get("/users/:id", UserController.details);
+router.get("/users/:page", UserController.list);
+router.get("/user/:id", UserController.details);
 router.delete("/users/:id", UserController.delete);
 router.put("/users/:id", UserController.update);
 
 //Comments routes
 router.post(
-  "/comment",
-  [
-    check("email")
-      .isEmail()
-      .withMessage("L'email est incorrect"),
-    check("firstname")
-      .not()
-      .isEmpty()
-      .withMessage("Merci de saisir votre prénom"),
-    check("lastname")
-      .not()
-      .isEmpty()
-      .withMessage("Merci de saisir votre nom"),
-    check("content")
-      .not()
-      .isEmpty()
-      .withMessage("Merci de saisir votre message")
-  ],
-  CommentController.create
+    "/comment",
+    [
+        check("email")
+            .isEmail()
+            .withMessage("L'email est incorrect"),
+        check("firstname")
+            .not()
+            .isEmpty()
+            .withMessage("Merci de saisir votre prénom"),
+        check("lastname")
+            .not()
+            .isEmpty()
+            .withMessage("Merci de saisir votre nom"),
+        check("content")
+            .not()
+            .isEmpty()
+            .withMessage("Merci de saisir votre message")
+    ],
+    CommentController.create
 );
 router.get("/comments", CommentController.list);
 router.get("/comments/:id", CommentController.details);

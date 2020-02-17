@@ -51,6 +51,7 @@ export default class UserController {
 
         try {
             let users = await User.find().select("-email -__v");
+            let page = req.params.page;
             body = { users, message: "Users list" };
         } catch (error) {
             status = 500;

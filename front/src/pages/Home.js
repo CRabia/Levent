@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Card from "../components/CardComponent";
 import { Link } from "react-router-dom";
-import logo from "../logo.png";
+import logo from "../assets/img/logo.png";
 
 export default class Home extends Component {
     componentDidMount() {
