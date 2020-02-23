@@ -16,7 +16,8 @@ export default class CommentController {
                 lastname: req.body.lastname,
                 email: req.body.email,
                 content: req.body.content,
-                createdAt: new Date()
+                createdAt: new Date(),
+                publicationStatus: false
             });
             body = {
                 newComment,
@@ -108,12 +109,41 @@ export default class CommentController {
                     firstname: req.body.firstname,
                     lastname: req.body.lastname,
                     email: req.body.email,
-                    content: req.body.content
+                    content: req.body.content,
+                    publicationStatus: req.body.publication
                 },
                 { new: true }
             );
+            console.log(req.body.publication);
 
             body = { comment, message: "Comment was updated" };
+        } catch (error) {
+            status = 500;
+            body = { message: error.message };
+        }
+
+        return res.status(status).json(body);
+    }
+
+    /**
+     * Return the list of comment per page
+     * @param {Request} req
+     * @param {Response} res
+     */
+
+    static async listPerPage(req, res) {
+        let status = 200;
+        let body = {};
+
+        try {
+            let commentPerPage = parseInt(req.params.commentPerPage, 10);
+            let page = parseInt(req.params.page, 10);
+            let comments = await Comment.find()
+                .select("-__v")
+                .limit(commentPerPage)
+                .skip(commentPerPage * page);
+            let countComment = await Comment.find();
+            body = { comments, length: countComment.length, message: "Comment list per page" };
         } catch (error) {
             status = 500;
             body = { message: error.message };

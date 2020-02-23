@@ -1,0 +1,219 @@
+#template-admin {
+  display: flex;
+}
+
+.page-admin {
+  padding: 25px 25px 15px 25px;
+  background-color: $main-color-admin-background;
+  min-height: calc(100vh - 40px);
+  max-width: 100%;
+  width: 100%;
+  color: $main-color-admin-text;
+  h1 {
+    font-size: 46px;
+    margin: 25px 15px 50px 15px;
+  }
+  h1.small {
+    font-size: 36px;
+  }
+}
+
+.header-bar {
+  display: flex;
+  padding: 10px 25px;
+  background-color: white;
+  box-shadow: 6px 6px 12px #b1cae0;
+  border-radius: 8px;
+  margin: 15px 0 45px 0;
+  justify-content: space-between;
+  label {
+    color: $main-color-admin-text;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-weight: bold;
+  }
+}
+
+.header-table {
+  display: flex;
+  justify-content: space-between;
+  margin: 25px 0;
+  div {
+    label {
+      font-size: 12px;
+    }
+    input[type="number"] {
+      margin: 0 8px;
+      width: 50px;
+    }
+  }
+}
+
+.pagination {
+  display: flex;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding: 0;
+  margin: 0 8px;
+  li {
+    list-style: none;
+    display: block;
+    margin: 0 5px;
+    &.active {
+      background-color: #bbc8d4;
+    }
+    a {
+      padding: 2px 5px;
+      cursor: pointer;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
+
+.search-bar {
+  input[type="text"] {
+    padding: 6px 35px 6px 15px;
+    background-color: #eff1f3;
+    border: none;
+    border-radius: 2rem;
+    //box-shadow: inset 3px 3px 12px #b1cae0;
+    &:focus {
+      outline: none;
+    }
+    &::placeholder {
+      color: #cbccd0;
+    }
+  }
+  .btn-search {
+    font-family: "Montserrat";
+    background-color: #8379a7;
+    cursor: pointer;
+    font-size: 14px;
+    color: white;
+    border: none;
+    border-radius: 2rem;
+    padding: 5px 10px 4px 10px;
+    transform: translateX(-30px) translateY(1px);
+    &:hover {
+      background-color: #5d4e8e;
+    }
+  }
+}
+
+.table {
+  width: 100%;
+  padding: 10px 25px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 6px 6px 12px #b1cae0;
+  border-collapse: collapse;
+  overflow: hidden;
+  thead {
+    border-radius: 8px 8px 0 0;
+    background-color: $main-color-admin-hover;
+    th {
+      padding: 10px;
+      text-align: left;
+    }
+  }
+  tbody {
+    tr {
+      border-bottom: 1px solid #d8e6f3;
+      &:hover {
+        background-color: #eaf3fb;
+      }
+    }
+    td {
+      border: 0;
+      padding: 15px 10px;
+    }
+    .td-action {
+      padding: 0 10px;
+    }
+  }
+}
+
+.btn-classic {
+  display: block;
+  padding: 8px 15px;
+  border-radius: 8px;
+  text-align: center;
+  border: none;
+  font-size: 14px;
+  font-family: "Montserrat";
+  background-color: #8379a7;
+  color: white;
+  cursor: pointer;
+  &:hover {
+    background-color: #5d4e8e;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+form {
+  .display-form-admin {
+    display: flex;
+    .label {
+      color: $main-color-admin-text;
+      width: 150px;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+    input[type="text"] {
+      border: none;
+      background-color: transparent;
+      font-family: "Montserrat";
+      color: $main-color-admin-text;
+      height: 30px;
+      padding: 0 10px;
+      border-radius: 3px;
+      font-size: 14px;
+      &:focus {
+        outline: none;
+        background-color: white;
+      }
+    }
+    select {
+      border: none;
+      background-color: transparent;
+      padding: 0 6px;
+      font-family: "Montserrat";
+      color: $main-color-admin-text;
+      height: 30px;
+      cursor: pointer;
+      option {
+        border: none;
+        font-size: 14px;
+        background-color: transparent;
+      }
+      &:focus {
+        outline: none;
+      }
+    }
+    textarea {
+      background-color: transparent;
+      font-family: "Montserrat";
+      color: $main-color-admin-text;
+      padding: 5px 10px;
+      border-radius: 3px;
+      margin: 7px 0;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  .container-button-form {
+    display: flex;
+    button {
+      margin: 15px 5px 0 5px;
+    }
+  }
+}

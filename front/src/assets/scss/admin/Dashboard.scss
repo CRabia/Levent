@@ -1,0 +1,79 @@
+#dashboard-admin {
+}
+
+.part-page {
+    display: flex;
+    justify-content: center;
+    .column {
+        max-width: 50%;
+        width: 50%;
+        padding: 5px;
+        margin: 25px 10px 10px 10px;
+    }
+}
+
+.box {
+    border-radius: 8px;
+    margin: 15px 5px;
+    padding: 15px;
+    h2 {
+        margin-top: 0;
+    }
+}
+
+.box.white {
+    background-color: white;
+}
+
+.box.white-3d {
+    background-color: white;
+    box-shadow: 3px 3px 12px $main-color-admin-hover;
+}
+
+.box.inset {
+    background-color: #e3edf7;
+    box-shadow: inset 3px 3px 12px #a4bbd0;
+}
+
+.container-header-part {
+    .header-part {
+        display: flex;
+        flex-wrap: wrap;
+        .item-header {
+            margin: 0 25px 25px 25px;
+            padding: 0 15px 0 15px;
+            background-color: white;
+            border-radius: 8px;
+            display: flex;
+            &:before {
+                content: "";
+                width: 15px;
+                height: 100%;
+                display: block;
+                position: relative;
+                left: -15px;
+                border-radius: 8px 0 0 8px;
+            }
+        }
+        .item-header.orange {
+            &:before {
+                background-color: $first-color;
+            }
+        }
+        .item-header.pink {
+            &:before {
+                background-color: $second-color;
+            }
+        }
+        .item-header.violet {
+            &:before {
+                background-color: $third-color;
+            }
+        }
+        .item-header.blue {
+            &:before {
+                background-color: $fifth-color;
+            }
+        }
+    }
+}

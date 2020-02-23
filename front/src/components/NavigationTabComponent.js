@@ -8,7 +8,7 @@ const NavigationTab = props => {
 
     useEffect(() => {
         location.pathname === props.path ? setNavigationTabActive("activated-tab-nav") : setNavigationTabActive("");
-    }, [location.pathname]);
+    }, [location.pathname, props]);
 
     return (
         <div id={navigationTabActive} className="selector-navigation-tab item-nav vertical-center">

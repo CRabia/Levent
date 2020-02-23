@@ -20,6 +20,10 @@ const commentSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         required: true
+    },
+    publicationStatus: {
+        type: Boolean,
+        required: true
     }
 });
 

@@ -1,37 +1,45 @@
 import mongoose from "mongoose";
 
 const eventSchema = new mongoose.Schema({
-  createdAt: {
-    type: Date,
-    required: true
-  },
-  status: {
-    type: String,
-    required: true
-  },
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User"
-  },
-  description: {
-    type: String,
-    required: true
-  },
-  title: {
-    type: String,
-    required: true
-  },
-  addresses: [
-    {
-      addresse: String,
-      city: String
+    created_on: {
+        type: Date,
+        required: true
+    },
+    publicationStatus: {
+        type: Boolean,
+        required: true
+    },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    },
+    description: {
+        type: String,
+        required: true
+    },
+    title: {
+        type: String,
+        required: true
+    },
+    addresses: [
+        {
+            addresse: String,
+            city: String
+        }
+    ],
+    date: {
+        type: Date,
+        required: true
+    },
+    price: {
+        type: Number,
+        required: true
+    },
+    website: {
+        type: String,
+        required: false
     }
-  ],
-  date: {
-    type: Date,
-    required: true
-  }
 });
 
-const Event = mongoose.model("Friend", eventSchema);
+const Event = mongoose.model("Event", eventSchema);
 export default Event;

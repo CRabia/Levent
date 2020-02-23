@@ -50,9 +50,35 @@ export default class UserController {
         let body = {};
 
         try {
-            let users = await User.find().select("-email -__v");
-            let page = req.params.page;
+            let users = await User.find().select("-__v");
             body = { users, message: "Users list" };
+        } catch (error) {
+            status = 500;
+            body = { message: error.message };
+        }
+
+        return res.status(status).json(body);
+    }
+
+    /**
+     * Return the list of user per page
+     * @param {Request} req
+     * @param {Response} res
+     */
+
+    static async listPerPage(req, res) {
+        let status = 200;
+        let body = {};
+
+        try {
+            let userPerPage = parseInt(req.params.userPerPage, 10);
+            let page = parseInt(req.params.page, 10);
+            let users = await User.find()
+                .select("-__v")
+                .limit(userPerPage)
+                .skip(userPerPage * page);
+            let countUser = await User.find();
+            body = { users, length: countUser.length, message: "Users list per page" };
         } catch (error) {
             status = 500;
             body = { message: error.message };
@@ -117,12 +143,34 @@ export default class UserController {
                 {
                     firstname: req.body.firstname,
                     lastname: req.body.lastname,
-                    email: req.body.email
+                    email: req.body.email,
+                    user_role: req.body.user_role
                 },
                 { new: true }
             );
 
             body = { user, message: "User was updated" };
+        } catch (error) {
+            status = 500;
+            body = { message: error.message };
+        }
+
+        return res.status(status).json(body);
+    }
+
+    /**
+     * Search user in database
+     * @param {Request} req
+     * @param {Response} res
+     */
+    static async search(req, res) {
+        let status = 200;
+        let body = {};
+
+        try {
+            let value = req.body.value;
+            let users = await User.find({ firstname: value });
+            body = { users, message: "User was updated" };
         } catch (error) {
             status = 500;
             body = { message: error.message };

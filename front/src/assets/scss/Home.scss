@@ -1,0 +1,114 @@
+//home page
+#homepage {
+    min-height: calc(100vh - 73px);
+    width: 100%;
+    padding: 73px 0 150px 0;
+    //background: linear-gradient(35deg, $main-violet, $main-blue);
+    background: linear-gradient(35deg, $fifth-color, $fourth-color, $third-color, $second-color, $first-color);
+    &:before {
+        content: "";
+        position: absolute;
+        bottom: -150px;
+        display: block;
+        width: 100%;
+        height: 150px;
+        background: linear-gradient(0deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
+    }
+
+    .banner-home {
+        display: flex;
+        justify-content: center;
+        .content {
+            color: white;
+            max-width: 600px;
+            min-width: 600px;
+            margin: 0 10px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            height: calc(100vh - 230px);
+            .logo {
+                width: 65px;
+                height: 98px;
+                margin: 0 0 75px 10px;
+            }
+            h1 {
+                font-size: 42px;
+                margin: 0;
+            }
+            p {
+                font-size: 20px;
+                font-weight: normal;
+                margin: 40px 0;
+            }
+        }
+        .illustration {
+            margin: 0 0 0 50px;
+            max-width: 530px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            height: calc(100vh - 180px);
+            .display-card {
+                transition: 1s;
+                display: flex;
+                justify-content: center;
+                .card-component {
+                    transform: rotateY(-35deg) rotateX(25deg) rotate(8deg) rotateZ(-3deg);
+                }
+            }
+            #position-top {
+                position: relative;
+                left: calc(100% + 500px);
+                .card-component {
+                    position: relative;
+                    opacity: 0;
+                    top: 120px;
+                    left: 45px;
+                }
+            }
+            #position-bottom {
+                position: relative;
+                left: calc(100% + 500px);
+                .card-component {
+                    position: relative;
+                    opacity: 0;
+                    z-index: 3;
+                    top: -120px;
+                    left: -45px;
+                }
+            }
+            #position-middle {
+                position: relative;
+                left: calc(100% + 500px);
+                .card-component {
+                    opacity: 0;
+                }
+            }
+        }
+    }
+}
+
+//card component
+.card-component {
+    background-color: white;
+    transition: 1s;
+    width: 225px;
+    height: 275px;
+    border-radius: 8px;
+    margin: 3px;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+    .card-content {
+        color: black;
+        padding: 10px;
+        p {
+            margin: 0;
+        }
+    }
+    .card-illustration {
+        background-color: #e5e5e5;
+        width: 100%;
+        height: 135px;
+        border-radius: 8px 8px 0 0;
+    }
+}

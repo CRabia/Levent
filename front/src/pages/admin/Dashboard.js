@@ -1,22 +1,43 @@
 import React, { useEffect, useState } from "react";
 import UserService from "../../services/user.service";
+import EventService from "../../services/event.service";
+import CategoryService from "../../services/category.service";
 
 const Dasboard = () => {
     const [countUser, setCountUser] = useState(0);
-    const [countUserParticipatedEvent, setCountUserParticipatedEvent] = useState(0);
     const [countEvent, setCountEvent] = useState(0);
     const [countCategory, setCountCategory] = useState(0);
-
-    const getUserStatistic = async () => {
-        let response = await UserService.list();
-        if (response.ok) {
-            let data = await response.json();
-            setCountUser(data.users.length);
-        }
-    };
+    const [lastUsers, setLastUsers] = useState([]);
 
     useEffect(() => {
+        const getUserStatistic = async () => {
+            let response = await UserService.list();
+            if (response.ok) {
+                let data = await response.json();
+                setCountUser(data.users.length);
+                setLastUsers(data.users.slice(Math.max(data.users.length - 5, 1)));
+            }
+        };
+
+        const getEventStatistic = async () => {
+            let response = await EventService.list();
+            if (response.ok) {
+                let data = await response.json();
+                setCountEvent(data.events.length);
+            }
+        };
+
+        const getCategoryStatistic = async () => {
+            let response = await CategoryService.list();
+            if (response.ok) {
+                let data = await response.json();
+                setCountCategory(data.categories.length);
+            }
+        };
+
         getUserStatistic();
+        getEventStatistic();
+        getCategoryStatistic();
     }, []);
 
     return (
@@ -28,7 +49,7 @@ const Dasboard = () => {
                         <div className="illustration"></div>
                         <div className="content">
                             <h3>Utilisateurs</h3>
-                            <p>0</p>
+                            <p>{countUser}</p>
                         </div>
                     </div>
                     <div className="item-header pink">
@@ -41,7 +62,7 @@ const Dasboard = () => {
                     <div className="item-header violet">
                         <div className="illustration"></div>
                         <div className="content">
-                            <h3>Evènements</h3>
+                            <h3>Nouveaux événements</h3>
                             <p>0</p>
                         </div>
                     </div>
@@ -49,7 +70,7 @@ const Dasboard = () => {
                         <div className="illustration"></div>
                         <div className="content">
                             <h3>Catégorie</h3>
-                            <p>0</p>
+                            <p>{countCategory}</p>
                         </div>
                     </div>
                 </div>
@@ -64,32 +85,21 @@ const Dasboard = () => {
                         </div>
                         <div className="para-statistic">
                             <label>Nombre d'utilisateur participant à des événements :</label>
-                            <p>{countUserParticipatedEvent}</p>
+                            <p></p>
                         </div>
                         <div className="para-statistic">
                             <label>Voici les derniers inscrits :</label>
                             <table>
                                 <tbody>
-                                    <tr>
-                                        <td>Nom</td>
-                                        <td>Prénom</td>
-                                        <td>Voir</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nom</td>
-                                        <td>Prénom</td>
-                                        <td>Voir</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nom</td>
-                                        <td>Prénom</td>
-                                        <td>Voir</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nom</td>
-                                        <td>Prénom</td>
-                                        <td>Voir</td>
-                                    </tr>
+                                    {lastUsers.map((item, key) => {
+                                        return (
+                                            <tr key={key}>
+                                                <td>{item.firstname}</td>
+                                                <td>{item.lastname}</td>
+                                                <td>Voir</td>
+                                            </tr>
+                                        );
+                                    })}
                                 </tbody>
                             </table>
                         </div>

@@ -1,6 +1,6 @@
 const baseUrl = "http://localhost:3001";
 
-export default class UserService {
+export default class CategoryService {
     static async list() {
         let init = {
             method: "GET",
@@ -9,7 +9,7 @@ export default class UserService {
                 Authorization: `Bearer ${localStorage.getItem("token")}`
             }
         };
-        let call = await fetch(`${baseUrl}/users`, init);
+        let call = await fetch(`${baseUrl}/categories`, init);
         return call;
     }
 
@@ -21,7 +21,7 @@ export default class UserService {
                 Authorization: `Bearer ${localStorage.getItem("token")}`
             }
         };
-        let call = await fetch(`${baseUrl}/user/${id}`, init);
+        let call = await fetch(`${baseUrl}/categories/${id}`, init);
         return call;
     }
 
@@ -34,7 +34,7 @@ export default class UserService {
             },
             body: JSON.stringify(body)
         };
-        let call = await fetch(`${baseUrl}/users/${id}`, init);
+        let call = await fetch(`${baseUrl}/categories/${id}`, init);
         return call;
     }
 
@@ -46,19 +46,7 @@ export default class UserService {
                 Authorization: `Bearer ${localStorage.getItem("token")}`
             }
         };
-        let call = await fetch(`${baseUrl}/users/${id}`, init);
-        return call;
-    }
-
-    static async listUsersPerPage(page, userPerPage) {
-        let init = {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("token")}`
-            }
-        };
-        let call = await fetch(`${baseUrl}/users/${userPerPage}/${page}`, init);
+        let call = await fetch(`${baseUrl}/categories/${id}`, init);
         return call;
     }
 }

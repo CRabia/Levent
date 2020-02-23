@@ -1,25 +1,37 @@
-import Category from "../models/Category";
+import Event from "../models/Event";
+const { validationResult } = require("express-validator/check");
 
-export default class CategoryController {
+export default class EventController {
     /**
-     * Creates a category in a database
+     * Creates an event in a database
      * @param {Request} req
      * @param {Response} res
      */
     static async create(req, res) {
         let status = 200;
         let body = {};
+        let errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
 
         try {
-            let newcategory = await Category.create({
-                label: req.body.label,
+            let newEvent = await Event.create({
+                created_on: new Date(),
+                publicationStatus: true,
+                userId: req.body.userId,
                 description: req.body.description,
-                publicationStatus: false
+                title: req.body.title,
+                addresses: req.body.addresses,
+                date: new Date(),
+                price: req.body.price,
+                website: req.body.website
             });
 
             body = {
-                newcategory,
-                message: "Category was created"
+                newEvent,
+                message: "Event of Levent was created"
             };
         } catch (error) {
             status = 500;
@@ -30,7 +42,7 @@ export default class CategoryController {
     }
 
     /**
-     * Return the list of all category
+     * Return the list of all event
      * @param {Request} req
      * @param {Response} res
      */
@@ -40,8 +52,8 @@ export default class CategoryController {
         let body = {};
 
         try {
-            let categories = await Category.find().select("-__v");
-            body = { categories, message: "Category list" };
+            let events = await Event.find().select("-__v");
+            body = { events, message: "Events list" };
         } catch (error) {
             status = 500;
             body = { message: error.message };
@@ -51,7 +63,7 @@ export default class CategoryController {
     }
 
     /**
-     * Find category in database and returns his information
+     * Find event in database and returns his information
      * @param {Request} req
      * @param {Response} res
      */
@@ -61,8 +73,8 @@ export default class CategoryController {
 
         try {
             let id = req.params.id;
-            let category = await Category.findById(id);
-            body = { category, message: "Category was found" };
+            let event = await User.findById(id);
+            event ? (body = { user, message: "Event was found" }) : (body = { event, message: "Event was not found" });
         } catch (error) {
             status = 500;
             body = { message: error.message };
@@ -72,7 +84,7 @@ export default class CategoryController {
     }
 
     /**
-     * Find category in database and deletes he
+     * Find event in database and deletes he
      * @param {Request} req
      * @param {Response} res
      */
@@ -81,18 +93,17 @@ export default class CategoryController {
         let body = {};
 
         try {
-            await Category.remove({ _id: req.params.id });
-            body = { message: "Category was deleted" };
+            await Event.remove({ _id: req.params.id });
+            body = { message: "Event was deleted" };
         } catch (error) {
             status = 500;
             body = { message: error.message };
         }
-
         return res.status(status).json(body);
     }
 
     /**
-     * Find category in database and updates he
+     * Find event in database and updates he
      * @param {Request} req
      * @param {Response} res
      */
@@ -101,16 +112,18 @@ export default class CategoryController {
         let body = {};
 
         try {
-            let category = await Category.findOneAndUpdate(
+            let event = await Event.update(
                 { _id: req.params.id },
                 {
-                    label: req.body.label,
-                    description: req.body.description
+                    description: req.body.description,
+                    title: req.body.title,
+                    price: req.body.price,
+                    website: req.body.website
                 },
                 { new: true }
             );
 
-            body = { category, message: "Category was updated" };
+            body = { event, message: "Event was updated" };
         } catch (error) {
             status = 500;
             body = { message: error.message };

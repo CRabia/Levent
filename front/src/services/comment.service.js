@@ -61,4 +61,16 @@ export default class CommentService {
         let call = await fetch(`${baseUrl}/comments/${id}`, init);
         return call;
     }
+
+    static async listCommentsPerPage(page, commentPerPage) {
+        let init = {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        };
+        let call = await fetch(`${baseUrl}/comments/${commentPerPage}/${page}`, init);
+        return call;
+    }
 }

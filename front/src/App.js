@@ -11,10 +11,16 @@ import Footer from "./components/Footer";
 import { AdminRoute } from "./admin.route";
 import AuthContext, { AuthProvider } from "./contexts/auth.context";
 import { createBrowserHistory } from "history";
-import PanelUser from "./pages/admin/PanelUser";
-import PanelComment from "./pages/admin/PanelComment";
-import PanelEvent from "./pages/admin/PanelEvent";
-import PanelCategory from "./pages/admin/PanelCategory";
+
+//tab od admin
+import PanelUser from "./pages/admin/PanelPage/PanelUser";
+import PanelComment from "./pages/admin/PanelPage/PanelComment";
+import PanelEvent from "./pages/admin/PanelPage/PanelEvent";
+import PanelCategory from "./pages/admin/PanelPage/PanelCategory";
+
+//eddition of Object
+import EditUser from "./pages/admin/EditPage/EditUser";
+import EditComment from "./pages/admin/EditPage/EditComment";
 
 const routes = ["/connexion", "/inscription"];
 const motifRoutesAdmin = "/admin";
@@ -41,8 +47,7 @@ const App = () => {
         } else {
             setRenderFooter(false);
             setRenderHeader(false);
-            customHistory.location.pathname.includes(motifRoutesAdmin) &&
-                setRenderHeaderAdmin(true);
+            customHistory.location.pathname.includes(motifRoutesAdmin) && setRenderHeaderAdmin(true);
         }
     };
 
@@ -54,34 +59,15 @@ const App = () => {
                 <AuthContext.Consumer>
                     {context => (
                         <div id="template-admin">
-                            {renderHeaderAdmin && (
-                                <HeaderAdmin theme="vertical" />
-                            )}
-                            <AdminRoute
-                                exact
-                                path="/admin/dashboard"
-                                component={AdminDasboard}
-                            />
-                            <AdminRoute
-                                exact
-                                path="/admin/user"
-                                component={PanelUser}
-                            />
-                            <AdminRoute
-                                exact
-                                path="/admin/comment"
-                                component={PanelComment}
-                            />
-                            <AdminRoute
-                                exact
-                                path="/admin/event"
-                                component={PanelEvent}
-                            />
-                            <AdminRoute
-                                exact
-                                path="/admin/category"
-                                component={PanelCategory}
-                            />
+                            {renderHeaderAdmin && <HeaderAdmin theme="vertical" />}
+                            <AdminRoute exact path="/admin/dashboard" component={AdminDasboard} />
+                            <AdminRoute exact path="/admin/user" component={PanelUser} />
+                            <AdminRoute exact path="/admin/comment" component={PanelComment} />
+                            <AdminRoute exact path="/admin/event" component={PanelEvent} />
+                            <AdminRoute exact path="/admin/category" component={PanelCategory} />
+
+                            <AdminRoute exact path="/admin/edit-user/:userId" component={EditUser} />
+                            <AdminRoute exact path="/admin/edit-comment/:commentId" component={EditComment} />
                         </div>
                     )}
                 </AuthContext.Consumer>
