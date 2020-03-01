@@ -3,7 +3,7 @@ import UserService from "../../../services/user.service";
 import ReactPaginate from "react-paginate";
 import TableComponent from "../../../components/TableComponent";
 import AdminPage from "../../../components/Page/AdminPageComponent";
-import HeaderTab from "../../../components/Header/HeaderTabComponent";
+import HeaderBar from "../../../components/Header/HeaderBarComponent";
 import AdminSearchBar from "../../../components/SearchBar/AdminSearchBarComponent";
 
 const PanelUser = () => {
@@ -44,9 +44,9 @@ const PanelUser = () => {
 
     return (
         <AdminPage id={"panel-user-admin"} title={"Utilisateurs"}>
-            <HeaderTab textLabel="Liste des utilisateurs">
+            <HeaderBar textLabel="Liste des utilisateurs">
                 <AdminSearchBar textButton="Rechercher" callBack={search} textPlaceholder="rechercher un utilisateur" />
-            </HeaderTab>
+            </HeaderBar>
 
             <div className="header-table">
                 <ReactPaginate

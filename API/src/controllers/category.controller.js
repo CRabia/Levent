@@ -136,7 +136,7 @@ export default class CategoryController {
                 .select("-__v")
                 .limit(categoryPerPage)
                 .skip(categoryPerPage * page);
-            let countCategory = await Comment.find();
+            let countCategory = await Category.find();
             body = { categories, length: countCategory.length, message: "Category list per page" };
         } catch (error) {
             status = 500;

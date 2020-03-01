@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
 import TableComponent from "../../../components/TableComponent";
 import AdminPage from "../../../components/Page/AdminPageComponent";
-import HeaderTab from "../../../components/Header/HeaderTabComponent";
+import HeaderBar from "../../../components/Header/HeaderBarComponent";
 import AdminSearchBar from "../../../components/SearchBar/AdminSearchBarComponent";
 import CommentService from "../../../services/comment.service";
 
@@ -14,7 +14,7 @@ const PanelComment = () => {
 
     const pathEdit = "edit-comment";
 
-    const nameOfColumn = ["id ", "Prénom", "Nom", "Email", "Date Insc.", "", ""];
+    const nameOfColumn = ["id ", "Prénom", "Nom", "Email", "Date Insc.", "Publication", ""];
 
     const updateListWithCommentFormatting = comments => {
         comments.map(comment => {
@@ -43,9 +43,9 @@ const PanelComment = () => {
 
     return (
         <AdminPage id={"panel-comment-admin"} title={"Commentaires"}>
-            <HeaderTab textLabel="Liste des commentaires">
+            <HeaderBar textLabel="Liste des commentaires">
                 <AdminSearchBar textButton="Rechercher" callBack={search} textPlaceholder="rechercher un commentaire" />
-            </HeaderTab>
+            </HeaderBar>
             <div className="header-table">
                 <ReactPaginate
                     previousLabel={"Préc."}

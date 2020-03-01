@@ -49,4 +49,16 @@ export default class CategoryService {
         let call = await fetch(`${baseUrl}/categories/${id}`, init);
         return call;
     }
+
+    static async listCategoriesPerPage(page, categoryPerPage) {
+        let init = {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        };
+        let call = await fetch(`${baseUrl}/categories/${categoryPerPage}/${page}`, init);
+        return call;
+    }
 }

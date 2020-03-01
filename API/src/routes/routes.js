@@ -74,7 +74,7 @@ router.put("/comments/:id", CommentController.update);
 router.post("/category", CategoryController.create);
 router.get("/categories", CategoryController.list);
 router.get("/categories/:id", CategoryController.details);
-router.get("/categories/:categoryPerPage/:page", UserController.listPerPage);
+router.get("/categories/:categoryPerPage/:page", CategoryController.listPerPage);
 router.delete("/categories/:id", CategoryController.delete);
 router.put("/categories/:id", CategoryController.update);
 

@@ -21,7 +21,11 @@ const TableComponent = props => {
                     return (
                         <tr key={key}>
                             {Object.values(item).map((attr, index) => {
-                                return <td key={index}>{attr}</td>;
+                                return (
+                                    <td key={index}>
+                                        {typeof attr === "boolean" ? (attr === false ? "non publié" : "publié") : attr}
+                                    </td>
+                                );
                             })}
                             <td className="td-action">
                                 <ClassicButton path={pathEdit} />
