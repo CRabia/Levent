@@ -131,4 +131,31 @@ export default class EventController {
 
         return res.status(status).json(body);
     }
+
+    /**
+     * Return the list of event per page
+     * @param {Request} req
+     * @param {Response} res
+     */
+
+    static async listPerPage(req, res) {
+        let status = 200;
+        let body = {};
+
+        try {
+            let eventPerPage = parseInt(req.params.eventPerPage, 10);
+            let page = parseInt(req.params.page, 10);
+            let events = await Event.find()
+                .select("-__v")
+                .limit(eventPerPage)
+                .skip(eventPerPage * page);
+            let countEvent = await Event.find();
+            body = { events, length: countEvent.length, message: "Event list per page" };
+        } catch (error) {
+            status = 500;
+            body = { message: error.message };
+        }
+
+        return res.status(status).json(body);
+    }
 }

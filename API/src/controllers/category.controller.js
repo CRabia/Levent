@@ -125,7 +125,6 @@ export default class CategoryController {
      * @param {Request} req
      * @param {Response} res
      */
-
     static async listPerPage(req, res) {
         let status = 200;
         let body = {};

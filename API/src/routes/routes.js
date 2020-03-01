@@ -112,6 +112,7 @@ router.post(
 );
 router.get("/events", EventController.list);
 router.get("/events/:id", EventController.details);
+router.get("/events/:eventPerPage/:page", EventController.listPerPage);
 router.delete("/events/:id", EventController.delete);
 router.put("/events/:id", EventController.update);
 
