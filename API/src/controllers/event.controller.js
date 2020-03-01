@@ -18,11 +18,11 @@ export default class EventController {
 
         try {
             let newEvent = await Event.create({
+                title: req.body.title,
                 created_on: new Date(),
-                publicationStatus: true,
+                publicationStatus: false,
                 userId: req.body.userId,
                 description: req.body.description,
-                title: req.body.title,
                 addresses: req.body.addresses,
                 date: new Date(),
                 price: req.body.price,
@@ -74,8 +74,8 @@ export default class EventController {
 
         try {
             let id = req.params.id;
-            let event = await User.findById(id);
-            event ? (body = { user, message: "Event was found" }) : (body = { event, message: "Event was not found" });
+            let event = await Event.findById(id);
+            event ? (body = { event, message: "Event was found" }) : (body = { event, message: "Event was not found" });
         } catch (error) {
             status = 500;
             body = { message: error.message };
