@@ -1,23 +1,11 @@
 import mongoose from "mongoose";
 
 const eventSchema = new mongoose.Schema({
-    created_on: {
-        type: Date,
-        required: true
-    },
-    publicationStatus: {
-        type: Boolean,
-        required: true
-    },
-    userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
-    },
-    description: {
+    title: {
         type: String,
         required: true
     },
-    title: {
+    description: {
         type: String,
         required: true
     },
@@ -38,6 +26,22 @@ const eventSchema = new mongoose.Schema({
     website: {
         type: String,
         required: false
+    },
+    typeof: {
+        type: String,
+        required: true
+    },
+    created_on: {
+        type: Date,
+        required: true
+    },
+    publicationStatus: {
+        type: Boolean,
+        required: true
+    },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
     }
 });
 

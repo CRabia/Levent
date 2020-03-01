@@ -26,7 +26,8 @@ export default class EventController {
                 addresses: req.body.addresses,
                 date: new Date(),
                 price: req.body.price,
-                website: req.body.website
+                website: req.body.website,
+                typeof: req.body.typeof
             });
 
             body = {
@@ -118,7 +119,8 @@ export default class EventController {
                     description: req.body.description,
                     title: req.body.title,
                     price: req.body.price,
-                    website: req.body.website
+                    website: req.body.website,
+                    typeof: req.body.typeof
                 },
                 { new: true }
             );
