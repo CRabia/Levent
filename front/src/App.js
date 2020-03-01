@@ -21,6 +21,7 @@ import PanelCategory from "./pages/admin/PanelPage/PanelCategory";
 //eddition of Object
 import EditUser from "./pages/admin/EditPage/EditUser";
 import EditComment from "./pages/admin/EditPage/EditComment";
+import EditCategory from "./pages/admin/EditPage/EditCategory";
 
 const routes = ["/connexion", "/inscription"];
 const motifRoutesAdmin = "/admin";
@@ -68,6 +69,7 @@ const App = () => {
 
                             <AdminRoute exact path="/admin/edit-user/:userId" component={EditUser} />
                             <AdminRoute exact path="/admin/edit-comment/:commentId" component={EditComment} />
+                            <AdminRoute exact path="/admin/edit-category/:categoryId" component={EditCategory} />
                         </div>
                     )}
                 </AuthContext.Consumer>

@@ -105,7 +105,8 @@ export default class CategoryController {
                 { _id: req.params.id },
                 {
                     label: req.body.label,
-                    description: req.body.description
+                    description: req.body.description,
+                    publicationStatus: req.body.publication
                 },
                 { new: true }
             );
