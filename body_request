@@ -2,8 +2,9 @@ Pour event :
 {
     "userId": "5e45c8db2f566003606abcdf",
     "description": "zuiodgq dud qiuz igd yqz d qzg qz dq gdg quzd quzdgqziudgqiuz dqiuzg dqiudqgiuzdqgdhqz q dhqudqzd",
-    "title": "Ceci est un test 9", 
+    "title": "Ceci est un test 10", 
     "price": "1",
+    "typeof":"public",
     "website": "https://prepacademy.fr",
     "addresses":{"addresse":"15 rue de Paris", "city":"Limours 91470"}
 }
@@ -27,4 +28,10 @@ pour les User :
     "lastname": "RABIA",
     "password": "dzdzdzdzdz",
     "email":"84ad84d84a8ad8f5fz@gmail.com"
+}
+
+pour les categories:
+{
+	"label":"Sport",
+	"description":" test zdzjdpozj zdpajo zdpja jzpa jdajpoajzd"
 }

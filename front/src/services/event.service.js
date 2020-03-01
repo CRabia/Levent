@@ -49,4 +49,16 @@ export default class EventService {
         let call = await fetch(`${baseUrl}/events/${id}`, init);
         return call;
     }
+
+    static async listEventsPerPage(page, eventPerPage) {
+        let init = {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        };
+        let call = await fetch(`${baseUrl}/events/${eventPerPage}/${page}`, init);
+        return call;
+    }
 }
