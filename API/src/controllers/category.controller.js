@@ -118,4 +118,31 @@ export default class CategoryController {
 
         return res.status(status).json(body);
     }
+
+    /**
+     * Return the list of category per page
+     * @param {Request} req
+     * @param {Response} res
+     */
+
+    static async listPerPage(req, res) {
+        let status = 200;
+        let body = {};
+
+        try {
+            let categoryPerPage = parseInt(req.params.categoryPerPage, 10);
+            let page = parseInt(req.params.page, 10);
+            let categories = await Category.find()
+                .select("-__v")
+                .limit(categoryPerPage)
+                .skip(categoryPerPage * page);
+            let countCategory = await Comment.find();
+            body = { categories, length: countCategory.length, message: "Category list per page" };
+        } catch (error) {
+            status = 500;
+            body = { message: error.message };
+        }
+
+        return res.status(status).json(body);
+    }
 }
