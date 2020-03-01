@@ -57,9 +57,9 @@ const EditUser = props => {
         <AdminPage class={"small"} title={title}>
             <Box class={"inset"} title={"Détail"}>
                 <form>
-                    <InputFormField callBack={setEmail} value={email} textField={"Email"} />
-                    <InputFormField callBack={setFirstname} value={firstname} textField={"Prénom"} />
-                    <InputFormField callBack={setLastname} value={lastname} textField={"Nom"} />
+                    <InputFormField type="text" callBack={setEmail} value={email} textField={"Email"} />
+                    <InputFormField type="text" callBack={setFirstname} value={firstname} textField={"Prénom"} />
+                    <InputFormField type="text" callBack={setLastname} value={lastname} textField={"Nom"} />
 
                     <SelectFormField callBack={setRole} value={user_role} textField={"Rôle"} options={optionsSelect} />
                     <ConfirmCancelButtons callBack={submit} textValidated={"Enregistrer"} textCanceled={"Annuler"} />

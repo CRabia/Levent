@@ -55,8 +55,13 @@ const EditCategory = props => {
         <AdminPage class={"small"} title={title}>
             <Box class={"inset"} title={"Détail"}>
                 <form>
-                    <InputFormField callBack={setLabel} value={label} textField={"Label"} />
-                    <InputFormField callBack={setDescription} value={description} textField={"Description"} />
+                    <InputFormField type="text" callBack={setLabel} value={label} textField={"Label"} />
+                    <InputFormField
+                        type="text"
+                        callBack={setDescription}
+                        value={description}
+                        textField={"Description"}
+                    />
                     <SelectFormField
                         callBack={setPublication}
                         value={publication}

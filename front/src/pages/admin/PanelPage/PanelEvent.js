@@ -14,18 +14,18 @@ const PanelEvent = () => {
 
     const pathEdit = "edit-event";
 
-    const nameOfColumn = ["id ", "title", "Date Créat.", "Publication", ""];
+    const nameOfColumn = ["id ", "title", "Date Créat.", "Publication", "Type", ""];
 
     const updateListWithEventFormatting = events => {
         events.map(event => {
             delete event.description;
             delete event.userId;
-            delete event.created_on;
             delete event.addresses;
             delete event.date;
             delete event.price;
             delete event.website;
         });
+
         setListEvents(events);
     };
 

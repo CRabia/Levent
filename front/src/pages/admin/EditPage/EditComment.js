@@ -60,9 +60,9 @@ const EditUser = props => {
         <AdminPage class={"small"} title={title}>
             <Box class={"inset"} title={"Détail"}>
                 <form>
-                    <InputFormField callBack="" value={email} textField={"Email"} />
-                    <InputFormField callBack="" value={firstname} textField={"Prénom"} />
-                    <InputFormField callBack="" value={lastname} textField={"Nom"} />
+                    <InputFormField type="text" callBack="" value={email} textField={"Email"} />
+                    <InputFormField type="text" callBack="" value={firstname} textField={"Prénom"} />
+                    <InputFormField type="text" callBack="" value={lastname} textField={"Nom"} />
                     <TextareaFormField callBack="" value={content} textField={"Commentaire"} />
                     <SelectFormField
                         callBack={setPublication}

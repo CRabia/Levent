@@ -160,6 +160,7 @@
 form {
   .display-form-admin {
     display: flex;
+    margin: 8px 0 0 0;
     .label {
       color: $main-color-admin-text;
       width: 150px;
@@ -167,7 +168,8 @@ form {
       justify-content: center;
       flex-direction: column;
     }
-    input[type="text"] {
+    input[type="text"],
+    input[type="date"] {
       border: none;
       background-color: transparent;
       font-family: "Montserrat";
@@ -178,6 +180,11 @@ form {
       font-size: 14px;
       &:focus {
         outline: none;
+        background-color: white;
+      }
+    }
+    input[type="date"] {
+      &:hover {
         background-color: white;
       }
     }
