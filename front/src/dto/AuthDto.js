@@ -1,4 +1,4 @@
-export default class LoginDto {
+export default class AuthDto {
     firstname = "";
     lastname = "";
     email = "";

@@ -33,8 +33,6 @@ const App = () => {
     const [renderFooter, setRenderFooter] = useState(true);
     const [renderHeaderAdmin, setRenderHeaderAdmin] = useState(false);
 
-    //const { state } = useContext(AuthContext);
-
     useEffect(() => {
         displayNavigationLayout();
         customHistory.listen(() => displayNavigationLayout());
@@ -56,25 +54,23 @@ const App = () => {
     };
 
     return (
-        <AuthProvider customHistory={customHistory}>
+        <AuthProvider>
             <Router history={customHistory}>
                 {renderHeader && <Header theme="transparent" />}
 
-                {/* {state.isAdmin && (
-                    <div id="template-admin">
-                        {renderHeaderAdmin && <HeaderAdmin theme="vertical" />}
-                        <AdminRoute exact path="/admin/dashboard" component={AdminDasboard} />
-                        <AdminRoute exact path="/admin/user" component={PanelUser} />
-                        <AdminRoute exact path="/admin/comment" component={PanelComment} />
-                        <AdminRoute exact path="/admin/event" component={PanelEvent} />
-                        <AdminRoute exact path="/admin/category" component={PanelCategory} />
+                <div id="template-admin">
+                    {renderHeaderAdmin && <HeaderAdmin theme="vertical" />}
+                    <AdminRoute exact path="/admin/dashboard" component={AdminDasboard} />
+                    <AdminRoute exact path="/admin/user" component={PanelUser} />
+                    <AdminRoute exact path="/admin/comment" component={PanelComment} />
+                    <AdminRoute exact path="/admin/event" component={PanelEvent} />
+                    <AdminRoute exact path="/admin/category" component={PanelCategory} />
 
-                        <AdminRoute exact path="/admin/edit-user/:userId" component={EditUser} />
-                        <AdminRoute exact path="/admin/edit-comment/:commentId" component={EditComment} />
-                        <AdminRoute exact path="/admin/edit-category/:categoryId" component={EditCategory} />
-                        <AdminRoute exact path="/admin/edit-event/:eventId" component={EditEvent} />
-                    </div>
-                )} */}
+                    <AdminRoute exact path="/admin/edit-user/:userId" component={EditUser} />
+                    <AdminRoute exact path="/admin/edit-comment/:commentId" component={EditComment} />
+                    <AdminRoute exact path="/admin/edit-category/:categoryId" component={EditCategory} />
+                    <AdminRoute exact path="/admin/edit-event/:eventId" component={EditEvent} />
+                </div>
 
                 <Route path="/" exact component={Home} />
                 <Route path="/contact" exact component={Contact} />
