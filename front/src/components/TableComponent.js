@@ -23,7 +23,7 @@ const TableComponent = props => {
                             {Object.values(item).map((attr, index) => {
                                 return (
                                     <td key={index}>
-                                        {typeof attr === "boolean" ? (attr === false ? "non publié" : "publié") : attr}
+                                        {typeof attr === "boolean" ? (attr === false ? "Non publié" : "Publié") : attr}
                                     </td>
                                 );
                             })}

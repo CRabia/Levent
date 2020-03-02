@@ -27,7 +27,7 @@ export default class EventController {
                 date: new Date(),
                 price: req.body.price,
                 website: req.body.website,
-                typeof: req.body.typeof
+                typeOf: req.body.typeOf
             });
 
             body = {
@@ -120,7 +120,10 @@ export default class EventController {
                     title: req.body.title,
                     price: req.body.price,
                     website: req.body.website,
-                    typeof: req.body.typeof
+                    typeOf: req.body.typeOf,
+                    publicationStatus: req.body.publication,
+                    created_on: Date.parse(req.body.created_on),
+                    date: Date.parse(req.body.date)
                 },
                 { new: true }
             );

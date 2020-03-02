@@ -5,5 +5,6 @@ export default class EventDto {
     typeOf = "";
     website = "";
     price = 0;
-    date = null;
+    date = "";
+    created_on = "";
 }

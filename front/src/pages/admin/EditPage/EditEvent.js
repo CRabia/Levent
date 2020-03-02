@@ -16,6 +16,7 @@ const EditEvent = props => {
     const [website, setWebsite] = useState("");
     const [price, setPrice] = useState(0);
     const [created_on, setCreatedOn] = useState("");
+    const [date, setDate] = useState("");
     const [publication, setPublication] = useState(0);
     const [typeOf, setTypeOf] = useState("");
     //const [city, setCity] = useState("");
@@ -23,9 +24,14 @@ const EditEvent = props => {
 
     const [titlePage, setTitlePage] = useState("");
 
-    const optionsSelect = [
+    const optionsSelectPublication = [
         { value: 0, text: "Non publié" },
         { value: 1, text: "Publié" }
+    ];
+
+    const optionsSelectType = [
+        { value: "public", text: "Public" },
+        { value: "private", text: "Privé" }
     ];
 
     useEffect(() => {
@@ -42,6 +48,7 @@ const EditEvent = props => {
             setDescription(e.description);
             setWebsite(e.website);
             setPrice(e.price);
+            setDate(new Date(e.date).toISOString().substr(0, 10));
             setCreatedOn(new Date(e.created_on).toISOString().substr(0, 10));
             setTypeOf(e.typeOf);
             setPublication(e.publicationStatus);
@@ -52,7 +59,16 @@ const EditEvent = props => {
     }, []);
 
     const updateEvent = async () => {
-        const dto = Object.assign(new EventDto(), { title, description, typeOf, price, website, publication });
+        const dto = Object.assign(new EventDto(), {
+            title,
+            description,
+            typeOf,
+            price,
+            website,
+            publication,
+            created_on,
+            date
+        });
         let response = await EventService.update(eventId, dto);
         response.ok ? console.log("ok") : console.log("none");
     };
@@ -70,11 +86,18 @@ const EditEvent = props => {
                     <TextareaFormField callBack={setDescription} value={description} textField={"Description"} />
                     <InputFormField type="text" callBack={setWebsite} value={website} textField={"Site"} />
                     <InputFormField type="date" callBack={setCreatedOn} value={created_on} textField={"Date créat."} />
+                    <InputFormField type="date" callBack={setDate} value={date} textField={"Date"} />
                     <SelectFormField
                         callBack={setPublication}
                         value={publication}
                         textField={"Publication"}
-                        options={optionsSelect}
+                        options={optionsSelectPublication}
+                    />
+                    <SelectFormField
+                        callBack={setTypeOf}
+                        value={typeOf}
+                        textField={"Type"}
+                        options={optionsSelectType}
                     />
                     <ConfirmCancelButtons callBack={submit} textValidated={"Enregistrer"} textCanceled={"Annuler"} />
                 </form>
