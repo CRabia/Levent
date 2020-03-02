@@ -9,17 +9,20 @@ export default class Home extends Component {
     }
 
     animationSlideTop = () => {
-        document.getElementById("position-top").classList.toggle("active-animation");
+        document.getElementById("position-top") &&
+            document.getElementById("position-top").classList.toggle("active-animation");
         setTimeout(this.animationSlideMiddle, 500);
     };
 
     animationSlideMiddle = () => {
-        document.getElementById("position-middle").classList.toggle("active-animation");
+        document.getElementById("position-middle") &&
+            document.getElementById("position-middle").classList.toggle("active-animation");
         setTimeout(this.animationSlideBottom, 500);
     };
 
     animationSlideBottom = () => {
-        document.getElementById("position-bottom").classList.toggle("active-animation");
+        document.getElementById("position-bottom") &&
+            document.getElementById("position-bottom").classList.toggle("active-animation");
     };
 
     render() {

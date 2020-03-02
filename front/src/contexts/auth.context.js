@@ -1,129 +1,59 @@
-import React, { Component } from "react";
+import React, { createContext, useEffect, useReducer } from "react";
 import AuthService from "../services/auth.service";
+import { reducer } from "../store/reducer";
+import TYPES from "../store/type";
+import initialState from "../store/state";
 
-const AuthContext = React.createContext();
+export const AuthContext = createContext();
 
-const modelErrorMessage = {
-    emailErrorMessage: "",
-    firstnameErrorMessage: "",
-    lastnameErrorMessage: "",
-    passwordErrorMessage: "",
-    errorMessage: ""
-};
+const AuthProvider = props => {
+    const [state, dispatch] = useReducer(reducer, initialState);
 
-const modelLogOut = {
-    isAuth: false,
-    isAdmin: false,
-    currentUserFirstname: "",
-    currentUserRole: 0
-};
+    useEffect(() => {
+        state.isAuth === null && isLogIn();
+        console.log(state);
+    }, []);
 
-export class AuthProvider extends Component {
-    state = {
-        errorMessage: "",
-        emailErrorMessage: "",
-        firstnameErrorMessage: "",
-        lastnameErrorMessage: "",
-        passwordErrorMessage: "",
-        isAuth: null,
-        isAdmin: false,
-        currentUserFirstname: "",
-        currentUserRole: 0
+    useEffect(() => {
+        console.log(state);
+    }, [state]);
+
+    const isLogIn = async () => {
+        let response = await AuthService.isAuthenticated();
+        response.ok ? logIn(await response.json()) : logOut();
+        isUserAdmin();
     };
 
-    componentDidMount = async () => {
-        if (this.state.isAuth === null) {
-            this.isLogIn();
-        }
-    };
-
-    userAuthentication = async body => {
-        let response = await AuthService.auth(body);
-        let data = await response.json();
-        if (response.ok) {
-            this.logIn(data);
-            this.props.customHistory.push("/");
-        } else {
-            this.setState({ errorMessage: data.message });
-        }
-    };
-
-    userRegistration = async body => {
-        let response = await AuthService.register(body);
-        let data = await response.json();
-        if (response.ok) {
-            this.userAuthentication(body);
-        } else {
-            this.errorsDisplay(data.errors);
-        }
-    };
-
-    logIn = data => {
+    const logIn = data => {
         localStorage.setItem("token", data.token);
-        this.setState({
-            currentUserFirstname: data.user.firstname,
-            currentUserRole: data.user.user_role,
-            isAuth: true
-        });
-        this.isUserAdmin();
+        dispatch({ type: TYPES.SET_USER, payload: data.user });
+        dispatch(TYPES.SET_IS_AUTH, true);
+        isUserAdmin();
     };
 
-    logOut = () => {
-        this.setState(modelLogOut);
+    const logOut = () => {
+        dispatch({ type: TYPES.SET_USER, payload: undefined });
+        dispatch(TYPES.SET_IS_ADMIN, false);
+        dispatch(TYPES.SET_IS_AUTH, false);
         localStorage.getItem("token") && localStorage.removeItem("token") && this.props.customHistory.push("/");
     };
 
     //Functions to check the user status
-
-    isUserAdmin = () => {
-        this.state.currentUserRole === 2 && this.setState({ isAdmin: true });
+    const isUserAdmin = () => {
+        state.user && state.user.role === 2 && dispatch(TYPES.SET_IS_ADMIN, true);
     };
+    return (
+        <AuthContext.Provider
+            value={{
+                dispatch,
+                state,
+                logIn,
+                logOut
+            }}
+        >
+            {props.children}
+        </AuthContext.Provider>
+    );
+};
 
-    isLogIn = async () => {
-        let response = await AuthService.isAuthenticated();
-        response.ok ? this.logIn(await response.json()) : this.logOut();
-        this.isUserAdmin();
-    };
-
-    //Functions to display errors when user tries to register/log in
-
-    resetErrorMessage = () => {
-        this.setState(modelErrorMessage);
-    };
-
-    errorsDisplay = errors => {
-        errors.forEach(element => {
-            this.setState({ [element.param + "ErrorMessage"]: element.msg });
-        });
-    };
-
-    //Function to start register/connect user
-
-    submit = async (e, body, request) => {
-        e.preventDefault();
-        this.resetErrorMessage();
-        if (request === "authenticate") {
-            this.userAuthentication(body);
-        } else {
-            this.userRegistration(body);
-        }
-    };
-
-    render() {
-        return (
-            <AuthContext.Provider
-                value={{
-                    submit: this.submit,
-                    resetErrorMessage: this.resetErrorMessage,
-                    logOut: this.logOut,
-                    isAdmin: this.isAdmin,
-                    ...this.state
-                }}
-            >
-                {this.props.children}
-            </AuthContext.Provider>
-        );
-    }
-}
-
-export default AuthContext;
+export default AuthProvider;
