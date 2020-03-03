@@ -5,8 +5,10 @@ import ConfirmCancelButtons from "../../../components/buttons/ConfirmCancelButto
 import Box from "../../../components/Container/BoxComponent";
 import AdminPage from "../../../components/Page/AdminPageComponent";
 import EventService from "../../../services/event.service";
+//import UploadService from "../../../services/upload.service";
 import EventDto from "../../../dto/EventDto";
 import TextareaFormField from "../../../components/Form/TextareaFormFieldComponent";
+import Axios from "axios";
 
 const EditEvent = props => {
     const eventId = props.match.params.eventId;
@@ -19,6 +21,10 @@ const EditEvent = props => {
     const [date, setDate] = useState("");
     const [publication, setPublication] = useState(0);
     const [typeOf, setTypeOf] = useState("");
+    const [file, setFile] = useState({});
+    const [imagePreviewUrl, setImagePreviewUrl] = useState({});
+    const [pathImage, setPathImage] = useState("");
+
     //const [city, setCity] = useState("");
     //const [address, setAddress] = useState("");
 
@@ -52,6 +58,7 @@ const EditEvent = props => {
             setCreatedOn(new Date(e.created_on).toISOString().substr(0, 10));
             setTypeOf(e.typeOf);
             setPublication(e.publicationStatus);
+            setPathImage(e.pathImage);
             setTitlePage("Edition de l'événement " + e.title);
         };
 
@@ -67,7 +74,8 @@ const EditEvent = props => {
             website,
             publication,
             created_on,
-            date
+            date,
+            pathImage
         });
         let response = await EventService.update(eventId, dto);
         response.ok ? console.log("ok") : console.log("none");
@@ -76,6 +84,32 @@ const EditEvent = props => {
     const submit = async e => {
         e.preventDefault();
         e.target.id === "validated" ? updateEvent() : props.history.push("/admin/event");
+    };
+
+    const fileChangedHandler = event => {
+        let reader = new FileReader();
+        let file = event.target.files[0];
+
+        reader.onloadend = () => {
+            setFile(file);
+            setImagePreviewUrl(reader.result);
+        };
+
+        reader.readAsDataURL(file);
+    };
+
+    const uploadImage = async e => {
+        e.preventDefault();
+        if (file !== "") {
+            const formData = new FormData();
+            formData.append("file", file, file.name);
+
+            let response = await Axios.post("http://localhost:3001/upload", formData);
+            if (response) {
+                setPathImage(response.data.filename);
+                updateEvent();
+            }
+        }
     };
 
     return (
@@ -99,8 +133,12 @@ const EditEvent = props => {
                         textField={"Type"}
                         options={optionsSelectType}
                     />
+
                     <ConfirmCancelButtons callBack={submit} textValidated={"Enregistrer"} textCanceled={"Annuler"} />
                 </form>
+                {pathImage && <img src={`http://localhost:3001/public/${pathImage}`} />}
+                <input type="file" name="avatar" onChange={fileChangedHandler} />
+                <button onClick={uploadImage}>valider</button>
             </Box>
         </AdminPage>
     );

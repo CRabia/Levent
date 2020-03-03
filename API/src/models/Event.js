@@ -42,6 +42,10 @@ const eventSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
+    },
+    pathImage: {
+        type: String,
+        required: false
     }
 });
 

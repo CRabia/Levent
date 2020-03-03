@@ -123,7 +123,8 @@ export default class EventController {
                     typeOf: req.body.typeOf,
                     publicationStatus: req.body.publication,
                     created_on: Date.parse(req.body.created_on),
-                    date: Date.parse(req.body.date)
+                    date: Date.parse(req.body.date),
+                    pathImage: req.body.pathImage
                 },
                 { new: true }
             );

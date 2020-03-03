@@ -24,6 +24,7 @@ const PanelEvent = () => {
             delete event.date;
             delete event.price;
             delete event.website;
+            delete event.pathImage;
         });
 
         setListEvents(events);

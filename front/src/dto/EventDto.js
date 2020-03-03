@@ -7,4 +7,5 @@ export default class EventDto {
     price = 0;
     date = "";
     created_on = "";
+    pathImage = "";
 }

@@ -6,8 +6,29 @@ import CategoryController from "../controllers/category.controller";
 import FriendController from "../controllers/friend.controller";
 import EventController from "../controllers/event.controller";
 
+import Event from "../models/Event";
+
+import path from "path";
+
 const router = Router();
 const { check } = require("express-validator/check");
+
+//Upload image
+var multer = require("multer");
+var storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, path.join(__dirname + "./../../public"));
+    },
+    filename: function(req, file, cb) {
+        cb(
+            null,
+            Math.random()
+                .toString(36)
+                .substring(2, 15) + path.extname(file.originalname)
+        );
+    }
+});
+var upload = multer({ storage: storage }).single("file");
 
 //Auth routes
 router.post("/users/authenticate", AuthController.authenticate);
@@ -115,5 +136,17 @@ router.get("/events/:id", EventController.details);
 router.get("/events/:eventPerPage/:page", EventController.listPerPage);
 router.delete("/events/:id", EventController.delete);
 router.put("/events/:id", EventController.update);
+
+router.post("/upload", function(req, res) {
+    upload(req, res, function(err) {
+        if (err instanceof multer.MulterError) {
+            return res.status(500).json(err);
+        } else if (err) {
+            return res.status(500).json(err);
+        }
+
+        return res.status(200).send(req.file);
+    });
+});
 
 export default router;
