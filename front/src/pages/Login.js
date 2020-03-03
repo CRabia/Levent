@@ -1,4 +1,5 @@
-import React, { Component, useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { AuthContext } from "../contexts/auth.context";
 import AuthDto from "../dto/AuthDto";
 import AuthService from "../services/auth.service";
@@ -21,8 +22,13 @@ const Login = props => {
     const [errorLoginMessage, setErrorLoginMessage] = useState("");
 
     const { dispatch } = useContext(AuthContext);
+    const location = useLocation();
 
     //Animation page
+    useEffect(() => {
+        location.pathname.includes("inscription") && changePageLog();
+    }, []);
+
     const changePageLog = () => {
         resetErrorMessage && resetErrorMessage();
         animationForm();
@@ -60,7 +66,7 @@ const Login = props => {
         let data = await response.json();
         if (response.ok) {
             logIn(data);
-            props.history.push("/");
+            props.history.push("/user/dashboard");
         } else {
             setErrorLoginMessage(data.message);
         }

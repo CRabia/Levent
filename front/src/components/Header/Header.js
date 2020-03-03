@@ -25,7 +25,7 @@ const Header = props => {
             {state.isAdmin && <NavigationTab name="Dashboard" path="/admin/dashboard" />}
             {state.isAuth ? (
                 <div className="flex">
-                    <NavigationTab name={state.user.firstname} path="/" />
+                    <NavigationTab name={state.user.firstname} path="/user/dashboard" />
                     <LogoutButton theme="light" />
                 </div>
             ) : (

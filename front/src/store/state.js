@@ -1,7 +1,7 @@
 const initialState = {
     user: {},
     isAdmin: false,
-    isAuth: ""
+    isAuth: false
 };
 
 export default initialState;

@@ -8,11 +8,20 @@ import AdminDasboard from "./pages/admin/Dashboard";
 import Header from "./components/Header/Header";
 import HeaderAdmin from "./components/Header/HeaderAdminComponent";
 import Footer from "./components/Footer";
-import { AdminRoute } from "./admin.route";
-import AuthProvider, { AuthContext } from "./contexts/auth.context";
+
+import AuthProvider from "./contexts/auth.context";
 import { createBrowserHistory } from "history";
 
-//tab od admin
+//Routage
+import Routes from "./routes/Routes";
+import { AdminRoute } from "./routes/admin.route";
+import { AuthRoute } from "./routes/auth.route";
+
+//tab of user
+import UserDashboard from "./pages/User/UserDasboard";
+import Event from "./pages/User/Event";
+
+//tab of admin
 import PanelUser from "./pages/admin/PanelPage/PanelUser";
 import PanelComment from "./pages/admin/PanelPage/PanelComment";
 import PanelEvent from "./pages/admin/PanelPage/PanelEvent";
@@ -25,8 +34,9 @@ import EditCategory from "./pages/admin/EditPage/EditCategory";
 import EditEvent from "./pages/admin/EditPage/EditEvent";
 
 const routes = ["/connexion", "/inscription"];
-const motifRoutesAdmin = "/admin";
-const customHistory = createBrowserHistory();
+const motifRoutesAdmin = "/admin/";
+const motifRoutesUser = "/user/";
+export const customHistory = createBrowserHistory();
 
 const App = () => {
     const [renderHeader, setRenderHeader] = useState(true);
@@ -41,11 +51,16 @@ const App = () => {
     const displayNavigationLayout = () => {
         if (
             !routes.includes(customHistory.location.pathname) &&
-            !customHistory.location.pathname.includes(motifRoutesAdmin)
+            !customHistory.location.pathname.includes(motifRoutesAdmin) &&
+            !customHistory.location.pathname.includes(motifRoutesUser)
         ) {
             setRenderFooter(true);
             setRenderHeader(true);
             setRenderHeaderAdmin(false);
+        } else if (customHistory.location.pathname.includes(motifRoutesUser)) {
+            setRenderFooter(false);
+            setRenderHeader(true);
+            customHistory.location.pathname.includes(motifRoutesAdmin) && setRenderHeaderAdmin(false);
         } else {
             setRenderFooter(false);
             setRenderHeader(false);
@@ -55,30 +70,35 @@ const App = () => {
 
     return (
         <AuthProvider>
-            <Router history={customHistory}>
-                {renderHeader && <Header theme="transparent" />}
+            <Routes>
+                <Router history={customHistory}>
+                    {renderHeader && <Header theme="transparent" />}
 
-                <div id="template-admin">
-                    {renderHeaderAdmin && <HeaderAdmin theme="vertical" />}
-                    <AdminRoute exact path="/admin/dashboard" component={AdminDasboard} />
-                    <AdminRoute exact path="/admin/user" component={PanelUser} />
-                    <AdminRoute exact path="/admin/comment" component={PanelComment} />
-                    <AdminRoute exact path="/admin/event" component={PanelEvent} />
-                    <AdminRoute exact path="/admin/category" component={PanelCategory} />
+                    <div id="template-admin">
+                        {renderHeaderAdmin && <HeaderAdmin theme="vertical" />}
+                        <AdminRoute exact path="/admin/dashboard" component={AdminDasboard} />
+                        <AdminRoute exact path="/admin/user" component={PanelUser} />
+                        <AdminRoute exact path="/admin/comment" component={PanelComment} />
+                        <AdminRoute exact path="/admin/event" component={PanelEvent} />
+                        <AdminRoute exact path="/admin/category" component={PanelCategory} />
 
-                    <AdminRoute exact path="/admin/edit-user/:userId" component={EditUser} />
-                    <AdminRoute exact path="/admin/edit-comment/:commentId" component={EditComment} />
-                    <AdminRoute exact path="/admin/edit-category/:categoryId" component={EditCategory} />
-                    <AdminRoute exact path="/admin/edit-event/:eventId" component={EditEvent} />
-                </div>
+                        <AdminRoute exact path="/admin/edit-user/:userId" component={EditUser} />
+                        <AdminRoute exact path="/admin/edit-comment/:commentId" component={EditComment} />
+                        <AdminRoute exact path="/admin/edit-category/:categoryId" component={EditCategory} />
+                        <AdminRoute exact path="/admin/edit-event/:eventId" component={EditEvent} />
+                    </div>
 
-                <Route path="/" exact component={Home} />
-                <Route path="/contact" exact component={Contact} />
-                <Route path="/inscription" exact component={Login} />
-                <Route path="/connexion" exact component={Login} />
+                    <AuthRoute exact path="/user/dashboard" component={UserDashboard} />
+                    <AuthRoute exact path="/user/event/:idEvent" component={Event} />
 
-                {renderFooter && <Footer />}
-            </Router>
+                    <Route path="/" exact component={Home} />
+                    <Route path="/contact" exact component={Contact} />
+                    <Route path="/inscription" exact component={Login} />
+                    <Route path="/connexion" exact component={Login} />
+
+                    {renderFooter && <Footer />}
+                </Router>
+            </Routes>
         </AuthProvider>
     );
 };
