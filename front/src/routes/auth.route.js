@@ -12,7 +12,7 @@ export const AuthRoute = ({ component: Component, ...rest }) => {
                 if (state.isAuth) {
                     return <Component {...props} />;
                 } else {
-                    return <Component {...props} />;
+                    //return <Component {...props} />;
                     return <Redirect to="/connexion" />;
                 }
             }}
