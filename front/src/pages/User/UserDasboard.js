@@ -52,29 +52,23 @@ const UserDashboard = () => {
     }, []);
 
     const makeFilter = async () => {
-        let tabResult = [];
+        let tabResult = listOfEvent;
 
-        for (const element of listOfEvent) {
-            let addElement = true;
-
-            if (categoryId !== "") {
-                if (element.categoryId !== categoryId) addElement = false;
-            }
-
-            if (searchCity !== "") {
-                let regex = RegExp(searchCity.toLowerCase());
-                let city = element.addresses[0].city.toLowerCase();
-                if (!regex.test(city)) {
-                    addElement = false;
-                }
-            }
-            let priceElement = parseInt(element.price);
-            if (parseInt(minBudget) > priceElement || priceElement > parseInt(maxBudget)) {
-                addElement = false;
-            }
-
-            addElement && (await tabResult.push(element));
+        if (categoryId !== "") {
+            tabResult = tabResult.filter(element => {
+                return element.categoryId === categoryId;
+            });
         }
+
+        if (searchCity !== "") {
+            tabResult = tabResult.filter(element => {
+                return element.addresses[0].city.toLowerCase() == searchCity.toLowerCase();
+            });
+        }
+
+        tabResult = tabResult.filter(
+            element => parseInt(element.price) > parseInt(minBudget) && parseInt(element.price) < parseInt(maxBudget)
+        );
         setResult(tabResult);
     };
 
@@ -121,7 +115,7 @@ const UserDashboard = () => {
                         let pathEdit = "/user/event/" + event._id;
                         return (
                             <Link to={pathEdit} key={key}>
-                                <Card idEvent={event._id} />
+                                <Card event={event} />
                             </Link>
                         );
                     })}
