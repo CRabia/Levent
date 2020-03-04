@@ -169,6 +169,26 @@ export default class EventController {
     }
 
     /**
+     * Return 4 event
+     * @param {Request} req
+     * @param {Response} res
+     */
+    static async listEvent(req, res) {
+        let status = 200;
+        let body = {};
+        try {
+            let events = await Event.find()
+                .select("-__v")
+                .limit(4);
+            body = { events, message: "Event" };
+        } catch (error) {
+            status = 500;
+            body = { message: error.message };
+        }
+        return res.status(status).json(body);
+    }
+
+    /**
      * Return the list of event published
      * @param {Request} req
      * @param {Response} res

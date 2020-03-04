@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import EventService from "../services/event.service";
 
 const Card = props => {
     return (

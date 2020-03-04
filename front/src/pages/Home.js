@@ -1,9 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "../components/CardComponent";
 import { Link } from "react-router-dom";
 import logo from "../assets/img/logo.png";
+import EventService from "../services/event.service";
 
 const Home = () => {
+    const [events, setEvents] = useState([]);
+
     useEffect(() => {
         const animationSlideTop = () => {
             document.getElementById("position-top") &&
@@ -22,8 +25,19 @@ const Home = () => {
                 document.getElementById("position-bottom").classList.toggle("active-animation");
         };
 
+        const getEvent = async () => {
+            let response = await EventService.listEventsLimit();
+            if (response.ok) {
+                let data = await response.json();
+                console.log(data.events);
+                setEvents(data.events);
+            }
+        };
+
+        getEvent();
+
         setTimeout(animationSlideTop, 500);
-    });
+    }, []);
 
     return (
         <div id="homepage">
@@ -38,19 +52,20 @@ const Home = () => {
                         </Link>
                     </div>
                 </div>
-
-                <div className="illustration">
-                    <div className="display-card" id="position-top">
-                        <Card />
+                {events[0] && (
+                    <div className="illustration">
+                        <div className="display-card" id="position-top">
+                            <Card event={events[0]} />
+                        </div>
+                        <div className="display-card" id="position-middle">
+                            <Card event={events[1]} />
+                            <Card event={events[2]} />
+                        </div>
+                        <div className="display-card" id="position-bottom">
+                            <Card event={events[3]} />
+                        </div>
                     </div>
-                    <div className="display-card" id="position-middle">
-                        <Card />
-                        <Card />
-                    </div>
-                    <div className="display-card" id="position-bottom">
-                        <Card />
-                    </div>
-                </div>
+                )}
             </section>
         </div>
     );

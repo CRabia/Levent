@@ -33,6 +33,17 @@ export default class EventService {
         return call;
     }
 
+    static async listEventsLimit() {
+        let init = {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        };
+        let call = await fetch(`${baseUrl}/events-limits`, init);
+        return call;
+    }
+
     static async listEventPublished() {
         let init = {
             method: "GET",

@@ -1,0 +1,3 @@
+{"_id":{"$oid":"5e5f69b8ac6f9b1344561cc8"},"user_role":{"$numberInt":"2"},"firstname":"exemple","lastname":"exemple","email":"exemple@exemple.fr","password":"exemple","created_on":{"$date":{"$numberLong":"1583311288497"}},"__v":{"$numberInt":"0"}}
+{"_id":{"$oid":"5e5f69dcac6f9b1344561cc9"},"user_role":{"$numberInt":"1"},"firstname":"julien","lastname":"julien","email":"julien@gmail.com","password":"julien","created_on":{"$date":{"$numberLong":"1583311324790"}},"__v":{"$numberInt":"0"}}
+{"_id":{"$oid":"5e5f8600ac6f9b1344561cd5"},"user_role":{"$numberInt":"2"},"firstname":"julien","lastname":"julien","email":"julieentest@gmail.com","password":"azerty","created_on":{"$date":{"$numberLong":"1583318528888"}},"__v":{"$numberInt":"0"}}

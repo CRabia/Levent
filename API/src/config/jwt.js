@@ -4,7 +4,7 @@ import User from "../models/User";
 function jwt() {
     const secret = "tokenlevent";
     return expressJwt({ secret, isRevoked }).unless({
-        path: ["/users/authenticate", "/users/authenticated", "/user", "/comment", "/upload"]
+        path: ["/users/authenticate", "/users/authenticated", "/user", "/comment", "/upload", "/events-limits"]
     });
 }
 
