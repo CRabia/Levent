@@ -12,7 +12,7 @@ export const AdminRoute = ({ component: Component, ...rest }) => {
                 if (state.isAdmin) {
                     return <Component {...props} />;
                 } else {
-                    return <Component {...props} />;
+                    //return <Component {...props} />;
                     return <Redirect to="/connexion" />;
                 }
             }}

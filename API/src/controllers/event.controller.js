@@ -126,7 +126,8 @@ export default class EventController {
                     created_on: Date.parse(req.body.created_on),
                     date: Date.parse(req.body.date),
                     pathImage: req.body.pathImage,
-                    categoryId: req.body.categoryId
+                    categoryId: req.body.categoryId,
+                    addresses: [req.body.addresses]
                 },
                 { new: true }
             );

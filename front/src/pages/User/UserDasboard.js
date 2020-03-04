@@ -81,7 +81,7 @@ const UserDashboard = () => {
     return (
         <div id="user-dashboard">
             <div className="banner">
-                <h1>Bienvenu sur votre tableau de bord {state.user.firstname}</h1>
+                <h1>Bienvenue sur votre tableau de bord {state.user.firstname}</h1>
             </div>
             <section className="container-dashboard">
                 <div className="filter-event">

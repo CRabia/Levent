@@ -9,4 +9,5 @@ export default class EventDto {
     created_on = "";
     pathImage = "";
     categoryId = "";
+    addresses = {};
 }

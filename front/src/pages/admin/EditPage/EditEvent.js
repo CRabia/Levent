@@ -25,6 +25,8 @@ const EditEvent = props => {
     const [file, setFile] = useState({});
     const [pathImage, setPathImage] = useState("");
     const [categoryId, setCategoryId] = useState("");
+    const [city, setCity] = useState("");
+    const [address, setAddress] = useState("");
 
     //const [city, setCity] = useState("");
     //const [address, setAddress] = useState("");
@@ -65,6 +67,8 @@ const EditEvent = props => {
             setPathImage(e.pathImage);
             setPathImage(e.pathImage);
             setCategoryId(e.categoryId);
+            setCity(e.addresses[0].city);
+            setAddress(e.addresses[0].addresse);
             setTitlePage("Edition de l'événement " + e.title);
         };
 
@@ -90,6 +94,7 @@ const EditEvent = props => {
     }, []);
 
     const updateEvent = async () => {
+        let addresses = { addresse: address, city: city };
         const dto = Object.assign(new EventDto(), {
             title,
             description,
@@ -100,7 +105,8 @@ const EditEvent = props => {
             created_on,
             date,
             pathImage,
-            categoryId
+            categoryId,
+            addresses
         });
         let response = await EventService.update(eventId, dto);
         response.ok ? console.log("ok") : console.log("none");
@@ -140,6 +146,8 @@ const EditEvent = props => {
                     <InputFormField type="text" callBack={setTitle} value={title} textField={"Titre"} />
                     <TextareaFormField callBack={setDescription} value={description} textField={"Description"} />
                     <InputFormField type="text" callBack={setWebsite} value={website} textField={"Site"} />
+                    <InputFormField type="text" callBack={setAddress} value={address} textField={"Adresse"} />
+                    <InputFormField type="text" callBack={setCity} value={city} textField={"Ville"} />
                     <InputFormField type="number" callBack={setPrice} value={price} textField={"Prix (€)"} />
                     <InputFormField type="date" callBack={setCreatedOn} value={created_on} textField={"Date créat."} />
                     <InputFormField type="date" callBack={setDate} value={date} textField={"Date"} />
