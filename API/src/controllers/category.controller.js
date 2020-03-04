@@ -11,14 +11,14 @@ export default class CategoryController {
         let body = {};
 
         try {
-            let newcategory = await Category.create({
+            let newCategory = await Category.create({
                 label: req.body.label,
                 description: req.body.description,
                 publicationStatus: false
             });
 
             body = {
-                newcategory,
+                newCategory,
                 message: "Category was created"
             };
         } catch (error) {
@@ -42,6 +42,27 @@ export default class CategoryController {
         try {
             let categories = await Category.find().select("-__v");
             body = { categories, message: "Category list" };
+        } catch (error) {
+            status = 500;
+            body = { message: error.message };
+        }
+
+        return res.status(status).json(body);
+    }
+
+    /**
+     * Return the list of all category published
+     * @param {Request} req
+     * @param {Response} res
+     */
+
+    static async listCategoriesPublished(req, res) {
+        let status = 200;
+        let body = {};
+
+        try {
+            let categories = await Category.find({ publicationStatus: true }).select("-__v");
+            body = { categories, message: "Category list published" };
         } catch (error) {
             status = 500;
             body = { message: error.message };

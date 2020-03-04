@@ -5,6 +5,7 @@ const TableComponent = props => {
     let items = props.items;
     const nameOfColumn = props.nameOfColumn;
     const basePathEdit = props.pathEdit;
+    const pathDelete = props.pathDelete;
 
     return (
         <table className="table">

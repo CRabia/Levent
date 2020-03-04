@@ -1,57 +1,112 @@
 #user-dashboard {
-  .banner {
-    background: linear-gradient(35deg, $fifth-color, $fourth-color, $third-color, $second-color, $first-color);
-    width: 100%;
-    margin: 0;
-    padding: 75px 0 25px 0;
-    min-height: 270px;
-    h1 {
-      text-align: center;
-      color: white;
-      margin-top: 50px;
-    }
-    &:before {
-      content: "";
-      position: absolute;
-      display: block;
-      top: 220px;
-      width: 100%;
-      height: 150px;
-      background: linear-gradient(0deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
-    }
-  }
-  .container-dashboard {
-    padding: 75px 0;
-    margin-top: -175px;
-    position: relative;
-    z-index: 3;
-    .filter-event {
-      max-width: 1320px;
-      width: calc(100% - 170px);
-      margin: 0 auto;
-      min-height: 150px;
-      border-radius: 8px;
-      background-color: #efefef;
-      box-shadow: 8px 8px 38px rgba(0, 0, 0, 0.1), 0 15px 12px rgba(0, 0, 0, 0.18);
-    }
-    .container-all-event {
-      margin: 45px 0 0 0;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-
-      a {
-        text-decoration: none;
-        margin: 5px 5px 25px 55px;
-      }
-      .card-component {
-        box-shadow: 2px 2px 38px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.18);
-        transition: 0.2s;
-
-        &:hover {
-          box-shadow: 8px 8px 38px rgba(0, 0, 0, 0.1), 0 15px 12px rgba(0, 0, 0, 0.18);
+    .banner {
+        background: linear-gradient(35deg, $fifth-color, $fourth-color, $third-color, $second-color, $first-color);
+        width: 100%;
+        margin: 0;
+        padding: 75px 0 25px 0;
+        min-height: 270px;
+        h1 {
+            text-align: center;
+            color: white;
+            margin-top: 50px;
         }
-      }
+        &:before {
+            content: "";
+            position: absolute;
+            display: block;
+            top: 220px;
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(0deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
+        }
     }
-  }
+    .container-dashboard {
+        padding: 75px 0;
+        margin-top: -175px;
+        position: relative;
+        z-index: 3;
+        .filter-event {
+            max-width: 1320px;
+            width: calc(100% - 170px);
+            margin: 0 auto;
+            min-height: 150px;
+            border-radius: 8px;
+            background-color: #efefef;
+            padding: 1px;
+            box-shadow: 8px 8px 38px rgba(0, 0, 0, 0.1), 0 15px 12px rgba(0, 0, 0, 0.18);
+            h2 {
+                text-align: center;
+                color: $fourth-color;
+            }
+            .btn-classic {
+                margin: 0 auto 8px auto;
+            }
+            .container-filter {
+                display: flex;
+                justify-content: space-around;
+                .item-filer {
+                    width: 250px;
+                    text-align: center;
+                    input,
+                    label {
+                        display: block;
+                    }
+                    label {
+                        margin-bottom: 5px;
+                    }
+                    input {
+                        padding: 8px 15px;
+                        border-radius: 8px;
+                        border: 1px solid #d0cdcd;
+                        background-color: #e7e7e7;
+                        color: $main-color-text;
+                        width: calc(100% - 30px);
+                        &:focus {
+                            outline: none;
+                            border-radius: 8px;
+                            border: 1px solid #b188d8;
+                        }
+                    }
+                    select {
+                        background-color: #e7e7e7;
+                        width: 100%;
+                        border-radius: 8px;
+                        padding: 0 6px;
+                        font-family: "Montserrat";
+                        color: $main-color-admin-text;
+                        border: 1px solid #d0cdcd;
+                        height: 30px;
+                        cursor: pointer;
+                        option {
+                            border: none;
+                            font-size: 14px;
+                            background-color: transparent;
+                        }
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+                }
+            }
+        }
+        .container-all-event {
+            margin: 45px 0 0 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+
+            a {
+                text-decoration: none;
+                margin: 5px 5px 25px 55px;
+            }
+            .card-component {
+                box-shadow: 2px 2px 38px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.18);
+                transition: 0.2s;
+
+                &:hover {
+                    box-shadow: 8px 8px 38px rgba(0, 0, 0, 0.1), 0 15px 12px rgba(0, 0, 0, 0.18);
+                }
+            }
+        }
+    }
 }

@@ -27,7 +27,8 @@ export default class EventController {
                 date: new Date(),
                 price: req.body.price,
                 website: req.body.website,
-                typeOf: req.body.typeOf
+                typeOf: req.body.typeOf,
+                categoryId: req.body.categoryId
             });
 
             body = {
@@ -124,7 +125,8 @@ export default class EventController {
                     publicationStatus: req.body.publication,
                     created_on: Date.parse(req.body.created_on),
                     date: Date.parse(req.body.date),
-                    pathImage: req.body.pathImage
+                    pathImage: req.body.pathImage,
+                    categoryId: req.body.categoryId
                 },
                 { new: true }
             );
@@ -157,6 +159,27 @@ export default class EventController {
                 .skip(eventPerPage * page);
             let countEvent = await Event.find();
             body = { events, length: countEvent.length, message: "Event list per page" };
+        } catch (error) {
+            status = 500;
+            body = { message: error.message };
+        }
+
+        return res.status(status).json(body);
+    }
+
+    /**
+     * Return the list of event published
+     * @param {Request} req
+     * @param {Response} res
+     */
+
+    static async listEventPublished(req, res) {
+        let status = 200;
+        let body = {};
+
+        try {
+            let events = await Event.find({ publicationStatus: true }).select("-__v");
+            body = { events, message: "Event list published" };
         } catch (error) {
             status = 500;
             body = { message: error.message };

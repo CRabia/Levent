@@ -6,7 +6,7 @@ import HeaderBar from "../../../components/Header/HeaderBarComponent";
 import AdminSearchBar from "../../../components/SearchBar/AdminSearchBarComponent";
 import EventService from "../../../services/event.service";
 
-const PanelEvent = () => {
+const PanelEvent = props => {
     const [listEvents, setListEvents] = useState([]);
     const [eventPerPage, setEventPerPage] = useState(10);
     const [eventTotal, setEventTotal] = useState(0);
@@ -25,6 +25,7 @@ const PanelEvent = () => {
             delete event.price;
             delete event.website;
             delete event.pathImage;
+            delete event.categoryId;
         });
 
         setListEvents(events);
@@ -37,6 +38,15 @@ const PanelEvent = () => {
             let data = await response.json();
             updateListWithEventFormatting(data.events);
             setEventTotal(data.length);
+        }
+    };
+
+    const createEvent = async () => {
+        let response = await EventService.create({});
+        if (response.ok) {
+            let data = await response.json();
+            let path = "edit-event/" + data.newEvent._id;
+            props.history.push(path);
         }
     };
 
@@ -77,6 +87,9 @@ const PanelEvent = () => {
                 </div>
             </div>
             <TableComponent items={listEvents} nameOfColumn={nameOfColumn} pathEdit={pathEdit} />
+            <button className="btn-classic" onClick={createEvent}>
+                Ajouter un événement
+            </button>
         </AdminPage>
     );
 };

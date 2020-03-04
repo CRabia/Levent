@@ -9,6 +9,8 @@ import EventController from "../controllers/event.controller";
 import Event from "../models/Event";
 
 import path from "path";
+import ParticipateController from "../controllers/participate.controller";
+import Participate from "../models/Participate";
 
 const router = Router();
 const { check } = require("express-validator/check");
@@ -94,6 +96,7 @@ router.put("/comments/:id", CommentController.update);
 //Categories routes
 router.post("/category", CategoryController.create);
 router.get("/categories", CategoryController.list);
+router.get("/categories-published", CategoryController.listCategoriesPublished);
 router.get("/categories/:id", CategoryController.details);
 router.get("/categories/:categoryPerPage/:page", CategoryController.listPerPage);
 router.delete("/categories/:id", CategoryController.delete);
@@ -132,10 +135,16 @@ router.post(
     EventController.create
 );
 router.get("/events", EventController.list);
+router.get("/events-published", EventController.listEventPublished);
 router.get("/events/:id", EventController.details);
 router.get("/events/:eventPerPage/:page", EventController.listPerPage);
 router.delete("/events/:id", EventController.delete);
 router.put("/events/:id", EventController.update);
+
+router.post("/participate", ParticipateController.create);
+router.get("/participations/:userId", ParticipateController.listByUser);
+router.get("/participations/:userId/:eventId", ParticipateController.findParticipation);
+router.delete("/participate/:id", ParticipateController.delete);
 
 router.post("/upload", function(req, res) {
     upload(req, res, function(err) {

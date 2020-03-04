@@ -6,7 +6,7 @@ import HeaderBar from "../../../components/Header/HeaderBarComponent";
 import AdminSearchBar from "../../../components/SearchBar/AdminSearchBarComponent";
 import CategoryService from "../../../services/category.service";
 
-const PanelCategory = () => {
+const PanelCategory = props => {
     const [listCategories, setListCategories] = useState([]);
     const [categoryPerPage, setCategoryPerPage] = useState(10);
     const [categoryTotal, setCategoryTotal] = useState(0);
@@ -30,6 +30,15 @@ const PanelCategory = () => {
             let data = await response.json();
             updateListWithCategoriesFormatting(data.categories);
             setCategoryTotal(data.length);
+        }
+    };
+
+    const createCategory = async () => {
+        let response = await CategoryService.create({});
+        if (response.ok) {
+            let data = await response.json();
+            let path = "edit-category/" + data.newCategory._id;
+            props.history.push(path);
         }
     };
 
@@ -70,6 +79,9 @@ const PanelCategory = () => {
                 </div>
             </div>
             <TableComponent items={listCategories} nameOfColumn={nameOfColumn} pathEdit={pathEdit} />
+            <button className="btn-classic" onClick={createCategory}>
+                Ajouter une catégorie
+            </button>
         </AdminPage>
     );
 };

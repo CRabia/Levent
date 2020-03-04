@@ -43,6 +43,10 @@ const eventSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     },
+    categoryId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Category"
+    },
     pathImage: {
         type: String,
         required: false

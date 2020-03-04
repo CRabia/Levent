@@ -26,7 +26,8 @@ const EditCategory = props => {
             let response = await CategoryService.details(categoryId);
             if (response.ok) {
                 let data = await response.json();
-                initializeForm(data.category);
+                if (data.category) initializeForm(data.category);
+                else props.history.push("/admin/category");
             }
         };
 
@@ -51,6 +52,10 @@ const EditCategory = props => {
         e.target.id === "validated" ? updateCategory() : props.history.push("/admin/category");
     };
 
+    const deleteCategory = async () => {
+        await CategoryService.delete(categoryId);
+    };
+
     return (
         <AdminPage class={"small"} title={title}>
             <Box class={"inset"} title={"Détail"}>
@@ -69,7 +74,12 @@ const EditCategory = props => {
                         options={optionsSelect}
                     />
 
-                    <ConfirmCancelButtons callBack={submit} textValidated={"Enregistrer"} textCanceled={"Annuler"} />
+                    <ConfirmCancelButtons
+                        callBack={submit}
+                        textValidated={"Enregistrer"}
+                        textCanceled={"Annuler"}
+                        pathDelete={deleteCategory}
+                    />
                 </form>
             </Box>
         </AdminPage>

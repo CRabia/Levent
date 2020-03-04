@@ -1,33 +1,93 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext, Fragment } from "react";
 import EventService from "../../services/event.service";
+import ParticipateService from "../../services/participate.service";
+import { AuthContext } from "../../contexts/auth.context";
 
 const Event = props => {
     const idEvent = props.match.params.idEvent;
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+    const [website, setWebsite] = useState("");
     const [price, setPrice] = useState(0);
-    const [user, setUser] = useState({});
+    const [created_on, setCreatedOn] = useState("");
+    const [date, setDate] = useState("");
+    const [publication, setPublication] = useState(0);
+    const [typeOf, setTypeOf] = useState("");
+    const [file, setFile] = useState({});
+    const [pathImage, setPathImage] = useState("");
+    const [participation, setParticipation] = useState("");
+
+    const { state } = useContext(AuthContext);
 
     useEffect(() => {
+        const initializeForm = e => {
+            setTitle(e.title);
+            setDescription(e.description);
+            setWebsite(e.website);
+            setPrice(e.price);
+            setDate(new Date(e.date).toISOString().substr(0, 10));
+            setCreatedOn(new Date(e.created_on).toISOString().substr(0, 10));
+            setTypeOf(e.typeOf);
+            setPublication(e.publicationStatus);
+            setPathImage(e.pathImage);
+        };
+
         const getEvent = async () => {
             let response = await EventService.details(idEvent);
             if (response.ok) {
                 let data = await response.json();
-                setTitle(data.event.title);
-                setDescription(data.event.description);
-                setPrice(data.event.price);
+                initializeForm(data.event);
             }
         };
 
         getEvent();
     }, []);
+
+    useEffect(() => {
+        const getParticipationToThisEvent = async () => {
+            let response = await ParticipateService.findParticipation(state.user._id, idEvent);
+            if (response.ok) {
+                let data = await response.json();
+                if (data.participation[0]) {
+                    setParticipation(data.participation[0]._id);
+                }
+            }
+        };
+
+        getParticipationToThisEvent();
+    }, [state.user]);
+
+    const participateToEvent = async () => {
+        let response = await ParticipateService.create(state.user._id, idEvent);
+        if (response.ok) {
+            let data = await response.json();
+            setParticipation(data.newParticipation._id);
+        }
+    };
+
+    const deleteParticipateToEvent = async () => {
+        let response = await ParticipateService.delete(participation);
+        if (response.ok) {
+            setParticipation("");
+        }
+    };
+
     return (
         <div id="detail-event">
             <section className="container-detail-event">
                 <div className="content">
                     <header>
-                        <div className="illustration"></div>
+                        <div className="illustration">
+                            {pathImage && (
+                                <img
+                                    src={`http://localhost:3001/public/${pathImage}`}
+                                    width="auto"
+                                    height="100%"
+                                    alt="image de l'event"
+                                />
+                            )}
+                        </div>
                         <div className="profil_user">
                             <div className="body">
                                 <div className="picture"></div>
@@ -43,6 +103,19 @@ const Event = props => {
                         <h1>{title}</h1>
                         <p>{description}</p>
                         <p>{price}</p>
+
+                        {participation === "" ? (
+                            <button className="btn-classic" onClick={participateToEvent}>
+                                Participer à l'événement
+                            </button>
+                        ) : (
+                            <Fragment>
+                                <p>Vous participez à cette événement</p>
+                                <button className="btn-classic red" onClick={deleteParticipateToEvent}>
+                                    Ne plus participer à l'événement
+                                </button>
+                            </Fragment>
+                        )}
                     </div>
                 </div>
                 <iframe
